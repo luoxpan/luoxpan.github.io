@@ -26,9 +26,9 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/XingpanLuo/PictureBed/BlogImag202303252043199.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/XingpanLuo/PictureBed/BlogImag202303252044239.png">
 <meta property="article:published_time" content="2023-03-25T12:03:06.000Z">
-<meta property="article:modified_time" content="2023-03-25T14:55:27.892Z">
+<meta property="article:modified_time" content="2023-03-29T11:15:22.576Z">
 <meta property="article:author" content="Luoxpan">
-<meta property="article:tag" content="cpp">
+<meta property="article:tag" content="CPP">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:image" content="https://cdn.jsdelivr.net/gh/XingpanLuo/PictureBed/BlogImag202303252043199.png">
   
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.3k 字
+          3.5k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          20 分钟
+          29 分钟
         
       </span>
     
@@ -322,7 +322,58 @@
 <li>C++ 标准要求类型相同的两个对象地址必须不同。</li>
 <li>发生这种情况的原因归结为正确实施标准，C++ 其中一条标准是“任何对象在内存中的地址都不应与任何其他变量相同”确保这一点的最简单方法是什么？确保所有类型都具有非零大小。为了实现这一点，编译器向没有数据成员和虚函数的结构和类添加一个虚拟字节，使它们的大小为 1 而不是 0，然后保证它们具有唯一的内存地址</li>
 </ul>
-<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2>
+<h2 id="多态"><a href="#多态" class="headerlink" title="多态"></a>多态</h2><p>多态，顾名思义就是同一种事物在不同情况下表现出不同的形态。</p>
+<p>C++中的多态可以分为<strong>静态多态</strong>和<strong>动态多态</strong>两种</p>
+<ul>
+<li>静态多态：函数重载和泛型编程（模板编程）</li>
+</ul>
+<h3 id="动态多态"><a href="#动态多态" class="headerlink" title="动态多态"></a>动态多态</h3><p>大部分情况下提到C++的多态指的是第二种动态多态。动态多态是通过在基类方法前加上<code>virtual</code> 关键字，使得该函数成为虚函数，然后子类可以重写该方法。这样包含虚方法的类就具有了多态性：</p>
+<ul>
+<li>通过基类指针调用虚函数时，若指针指向的基类对象，则调用基类的方法，若指向的是子类指针，则调用相应的子类方法。</li>
+<li>通过基类引用调用虚函数时，若引用的对象是基类对象，则调用基类方法，若引用对象是子类，则调用相应的子类方法。</li>
+</ul>
+<div class="note note-warning">
+            <p>如果基类中有虚函数，那么应该将基类的虚构函数也定义为虚函数。</p><p>原因：如果不那么做，基类指针指向子类，然后<code>delete</code>该指针时，调用的是基类的析构函数，这会导致子类的析构函数没有被调用。</p><p>而如果把基类的析构函数定义为虚函数，则<code>delete</code> 该指针会调用子类的析构函数，子类析构完成会自动调用基类的析构函数，这样才能保证子类和基类的资源都被释放。 </p>
+          </div>
+
+<h4 id="纯虚函数"><a href="#纯虚函数" class="headerlink" title="纯虚函数"></a>纯虚函数</h4><p>再基类的纯虚函数声明的后面加上<code>=0</code>。该虚函数成为纯虚函数，该基类成为抽象类。</p>
+<ul>
+<li>纯虚函数在基类中声明但不定义，而要求所有的派生类一定要定义这个虚函数的实现。</li>
+<li>具有纯虚函数的基类成为抽象类，抽象类不能实例化，但可以定义抽象类的指针或引用来对子类进行管理</li>
+<li>如果子类中只声明而没有实现纯虚函数，那么这个子类还是一个抽象类，依然不能实例化</li>
+</ul>
+<h4 id="虚函数指针和虚函数表"><a href="#虚函数指针和虚函数表" class="headerlink" title="虚函数指针和虚函数表"></a>虚函数指针和虚函数表</h4><p>C++通过虚函数指针和虚函数表来实现，</p>
+<p>每一个有虚函数的类，或者有虚函数的类的子类，都有一个虚函数表，虚函数表中列出了该类的虚函数的实现地址。这个虚函数表在编译期就建立，存储在了数据区段的<code>.rodata</code>子段。</p>
+<p>这些类的每一个对象都有一个指向虚函数表的指针。当通过基类指针调用虚函数时，会根据指针实际指向的对象中的虚表指针去找到对应的虚函数表，在表中找到函数实现。</p>
+<p>一些<strong>tips</strong>:</p>
+<ol>
+<li><p>虚表和虚表指针建立时间：</p>
+<ul>
+<li><p>虚函数表在编译期建立，虚表指针一般作为类的第一个成员变量，虚表指针在基类构造函数之后，子类构造函数之前进行初始化。</p>
+</li>
+<li><p>构造函数的调用过程：进入构造函数体之前，如果存在虚函数，虚表指针被初始化。如果存在构造函数的初始化列表，则执行初始化列表。然后进入构造函数体执行构造。</p>
+</li>
+</ul>
+</li>
+<li><p>哪些函数不能声明为虚函数</p>
+<ul>
+<li><p>友元函数，它不是类成员函数</p>
+</li>
+<li><p>静态成员函数，它没有this指针，没有this指针就无法访问虚表指针，也就找不到虚函数的实现</p>
+</li>
+<li><p>构造函数、复制构造函数以及赋值操作符重载可以但不建议声明为虚函数</p>
+</li>
+</ul>
+</li>
+<li><p>派生类虚表如何建立</p>
+<ul>
+<li>先将基类的虚表复制一份</li>
+<li>如果子类对基类中的虚函数进行了重写，则将子类的虚表相应位置替换为子类的函数实现地址</li>
+<li>如果子类新增了自己的虚函数，则按照其声明次序，放在上述虚表的后面</li>
+</ul>
+</li>
+</ol>
+
                 
               </div>
             
@@ -340,7 +391,7 @@
     
       <span class="category-chain">
         
-  <a href="/categories/cpp/" class="category-chain-item">cpp</a>
+  <a href="/categories/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%97/" class="category-chain-item">CPP困惑系列</a>
   
   
 
@@ -355,7 +406,7 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/cpp/">#cpp</a>
+        <a href="/tags/CPP/">#CPP</a>
       
     </div>
   
@@ -412,12 +463,18 @@
                   <article class="post-prev col-6">
                     
                     
+                      <a href="/2023/03/30/VIM%E5%9F%BA%E7%A1%80/" title="vim编辑器">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">vim编辑器</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
                   </article>
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/03/25/CPP%E8%BF%B7%E6%83%91%E7%B3%BB%E5%88%971-%E5%AD%98%E5%82%A8%E6%8C%81%E7%BB%AD%E6%80%A7%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E9%93%BE%E6%8E%A5%E6%80%A7/" title="CPP迷惑系列1-存储持续性、作用域、链接性">
-                        <span class="hidden-mobile">CPP迷惑系列1-存储持续性、作用域、链接性</span>
+                      <a href="/2023/03/25/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%971-%E5%AD%98%E5%82%A8%E6%8C%81%E7%BB%AD%E6%80%A7%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E9%93%BE%E6%8E%A5%E6%80%A7/" title="CPP困惑系列1-存储持续性、作用域、链接性">
+                        <span class="hidden-mobile">CPP困惑系列1-存储持续性、作用域、链接性</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -437,7 +494,7 @@
     Fluid.utils.loadComments('#valine', function() {
       Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
         var options = Object.assign(
-          {"appId":"9B0pagOE6I5saf1r2ysYAwBl-gzGzoHsz","appKey":"QIFnh0LADcmuLHa3l8PI0tNy","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://luoxpan.github.io/","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {"appId":"9B0pagOE6I5saf1r2ysYAwBl-gzGzoHsz","appKey":"QIFnh0LADcmuLHa3l8PI0tNy","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://luoxpan.github.io/","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
           {
             el: "#valine",
             path: window.location.pathname
