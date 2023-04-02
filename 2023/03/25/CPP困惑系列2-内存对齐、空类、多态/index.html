@@ -26,7 +26,7 @@
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/XingpanLuo/PictureBed/BlogImag202303252043199.png">
 <meta property="og:image" content="https://cdn.jsdelivr.net/gh/XingpanLuo/PictureBed/BlogImag202303252044239.png">
 <meta property="article:published_time" content="2023-03-25T12:03:06.000Z">
-<meta property="article:modified_time" content="2023-03-29T11:15:22.576Z">
+<meta property="article:modified_time" content="2023-03-31T09:53:36.649Z">
 <meta property="article:author" content="Luoxpan">
 <meta property="article:tag" content="CPP">
 <meta name="twitter:card" content="summary_large_image">
@@ -223,7 +223,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.5k 字
+          4.8k 字
         
       </span>
     
@@ -234,7 +234,7 @@
         
         
         
-          29 分钟
+          40 分钟
         
       </span>
     
@@ -373,6 +373,21 @@
 </ul>
 </li>
 </ol>
+<p>从类中直接获取虚函数表的方法</p>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> std;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">A</span>&#123;<br><span class="hljs-keyword">public</span>:<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">vAfunc1</span><span class="hljs-params">()</span> </span>&#123; cout&lt;&lt;<span class="hljs-string">&quot;vAfunc1&quot;</span>&lt;&lt;endl; &#125;<br>	<span class="hljs-function"><span class="hljs-keyword">virtual</span> <span class="hljs-type">void</span> <span class="hljs-title">vAfunc2</span><span class="hljs-params">()</span> </span>&#123; cout&lt;&lt;<span class="hljs-string">&quot;vAfunc2&quot;</span>&lt;&lt;endl; &#125;<br>	<span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">Afunc</span><span class="hljs-params">()</span> </span>&#123; cout&lt;&lt;<span class="hljs-string">&quot;Afunc: &quot;</span>&lt;&lt;data1&lt;&lt;endl; &#125;<br><br><span class="hljs-keyword">private</span>:<br>	<span class="hljs-type">int</span> data1;<br>&#125;;<br><br><span class="hljs-keyword">using</span> Func=<span class="hljs-built_in">void</span>();<br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>	A a;<br>	<span class="hljs-keyword">auto</span> t1=(<span class="hljs-type">int64_t</span> *)(&amp;a);<span class="hljs-comment">//对a的地址强制转换</span><br>	<span class="hljs-keyword">auto</span> t2=(<span class="hljs-type">int64_t</span> *)*t1;<span class="hljs-comment">//对a的第一个数据解引用，取得虚表</span><br>	<span class="hljs-keyword">auto</span> t3=(Func *)*t2;	<span class="hljs-comment">//虚表的第一个元素。是a的第一个虚函数</span><br>	<span class="hljs-built_in">t3</span>();<br>	<span class="hljs-keyword">auto</span> t4=(Func *)*(t2+<span class="hljs-number">1</span>);<span class="hljs-comment">//虚表的第二个元素。</span><br>	<span class="hljs-built_in">t4</span>();<br>	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br><br><span class="hljs-comment">/*</span><br><span class="hljs-comment">运行结果：</span><br><span class="hljs-comment">vAfunc1</span><br><span class="hljs-comment">vAfunc2</span><br><span class="hljs-comment">*/</span><br></code></pre></td></tr></table></figure>
+
+<h2 id="RTTI-运行时类型判别"><a href="#RTTI-运行时类型判别" class="headerlink" title="RTTI 运行时类型判别"></a>RTTI 运行时类型判别</h2><p>当一个函数的传入参数是一个基类指针（引用）时，我们可能需要知道这个基类指针参数指向的到底指向的是哪一种子类。</p>
+<p>这就需要用到虚表中第一个函数的前面存放的一个<code>type_info</code></p>
+<p>可以直接从<code>type_info</code>中获取类的类型信息，但那样太麻烦，C++提供了可以直接使用的库函数<code>typeid()</code>可以返回指针和引用所指的实际类型。</p>
+<figure class="highlight elm"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs elm"><span class="hljs-title">void</span> test(<span class="hljs-type">A</span> *a)&#123;<br>	<span class="hljs-keyword">if</span>(typeid(*a)==typeid(<span class="hljs-type">A</span>))&#123;<br>		<span class="hljs-type">A</span> *pa=reinterpret_cast&lt;<span class="hljs-type">A</span> *&gt;(a);<br>		pa-&gt;func1();<br>	&#125;<br>	<span class="hljs-keyword">if</span>(typeid(*a)==typeid(<span class="hljs-type">B</span>))&#123;<br>		<span class="hljs-type">B</span> *pb=reinterpret_cast&lt;<span class="hljs-type">B</span> *&gt;(a);<br>		pb-&gt;func2();<br>	&#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p><code>dynamic_cast&lt;type *&gt;(e)</code> 将基类的指针或引用安全的转成其子类的指针和引用</p>
+<figure class="highlight angelscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs angelscript"><span class="hljs-keyword">class</span> <span class="hljs-symbol">A</span>&#123;&#125;;<br><span class="hljs-keyword">class</span> <span class="hljs-symbol">B:<span class="hljs-symbol">public</span></span> <span class="hljs-symbol">A</span>&#123;&#125;;<br>B b;<br><br>A *pa=dynamic_cast&lt;A *&gt; (&amp;b);<span class="hljs-comment">//返回正常的A*</span><br><span class="hljs-comment">//下面这行代码pa尽管是一个A*指针，但它指向的内存大小是能容纳B类的，故能正常转换</span><br>B *pb=dynamic_cast&lt;B *&gt; (pa);<span class="hljs-comment">//返回正常的B* </span><br><br>A a;<br><span class="hljs-comment">//A类的内存小于B类的内存，下面的操作会返回nullptr</span><br>B *ppb=dynamic_cast&lt;B *&gt;(&amp;a);<span class="hljs-comment">//返回nullptr</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
 
                 
               </div>
