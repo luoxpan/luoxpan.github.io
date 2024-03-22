@@ -24,7 +24,7 @@
 <meta property="og:description" content="Google-CPP风格指南命名规则 通用规则：命名要有描述性，少用缩写 文件命名：小写+下划线 my_logger.h 类型命名：给个单词首字母大写，不包含下划线 MyExcitingClass 变量（包括函数参数）和数据成员名一律小写，单词之间用下划线连接 string table_name  不管是静态的还是非静态的, 类数据成员都可以和普通变量一样, 但要接下划线.string table">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2024-03-21T14:41:07.000Z">
-<meta property="article:modified_time" content="2024-03-21T16:19:43.198Z">
+<meta property="article:modified_time" content="2024-03-22T06:16:27.392Z">
 <meta property="article:author" content="Luoxpan">
 <meta property="article:tag" content="CPP">
 <meta name="twitter:card" content="summary_large_image">
@@ -220,7 +220,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          2.4k 字
+          3.5k 字
         
       </span>
     
@@ -231,7 +231,7 @@
         
         
         
-          21 分钟
+          29 分钟
         
       </span>
     
@@ -331,6 +331,15 @@
 <li>不要使用流，使用<code>printf(),fprintf(stderr,..)</code>等替代。</li>
 <li>尽量以内联函数，枚举和常量代替预处理宏。</li>
 </ol>
+<h2 id="Pimpl（private-Implementation"><a href="#Pimpl（private-Implementation" class="headerlink" title="Pimpl（private Implementation)"></a>Pimpl（private Implementation)</h2><p>pimpl的优点：</p>
+<ul>
+<li>核心数据成员被隐藏：核心数据成员被隐藏，不必暴露在头文件中，对使用者透明，提高了安全性</li>
+<li>降低编译依赖，提高编译速度</li>
+<li>接口与实现分离</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-comment">//csocket_client.h</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;memory&gt;</span> <span class="hljs-comment">//for std::unique_ptr  </span></span><br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">CSocketClient</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">CSocketClient</span>():<span class="hljs-built_in">m_pImpl</span>(std::<span class="hljs-built_in">make_unique</span>&lt;Impl&gt;());<br>    ~<span class="hljs-built_in">CSocketClient</span>();<br><br>    <span class="hljs-comment">//其他功能函数</span><br><br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-keyword">struct</span>                  <span class="hljs-title class_">Impl</span>;<br>    std::unique_ptr&lt;Impl&gt;   m_pImpl;<br>&#125;;<br><br><span class="hljs-comment">//csocket_client.cpp</span><br><br><span class="hljs-keyword">class</span>  <span class="hljs-title class_">CSocketClient</span>::Impl<br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">LoadConfig</span><span class="hljs-params">()</span></span><br><span class="hljs-function">    </span>&#123;<br>    	<span class="hljs-comment">//方法的具体实现</span><br>    &#125;<br>    <br>    <span class="hljs-comment">//其他方法省略...</span><br>    <br><span class="hljs-keyword">public</span>:<br>	SOCKET                          m_hSocket;<br>    <span class="hljs-type">short</span>                           m_nPort;<br>    <span class="hljs-type">char</span>                            m_szServer[<span class="hljs-number">64</span>];<br>    <span class="hljs-type">long</span>                            m_nLastDataTime;        <span class="hljs-comment">//最近一次收发数据的时间</span><br>    <span class="hljs-type">long</span>                            m_nHeartbeatInterval;   <span class="hljs-comment">//心跳包时间间隔，单位秒</span><br>    CRITICAL_SECTION                m_csLastDataTime;       <span class="hljs-comment">//保护m_nLastDataTime的互斥体 </span><br>    HANDLE                          m_hSendDataThread;      <span class="hljs-comment">//发送数据线程</span><br>    HANDLE                          m_hRecvDataThread;      <span class="hljs-comment">//接收数据线程</span><br>    std::string                     m_strSendBuf;<br>    std::string                     m_strRecvBuf;<br>    HANDLE                          m_hExitEvent;<br>    <span class="hljs-type">bool</span>                            m_bConnected;<br>    CRITICAL_SECTION                m_csSendBuf;<br>    HANDLE                          m_hSemaphoreSendBuf;<br>    HWND                            m_hProxyWnd;<br>    CNetProxy*                      m_pNetProxy;<br>    <span class="hljs-type">int</span>                             m_nReconnectTimeInterval;    <span class="hljs-comment">//重连时间间隔</span><br>    <span class="hljs-type">time_t</span>                          m_nLastReconnectTime;        <span class="hljs-comment">//上次重连时刻</span><br>    CFlowStatistics*                m_pFlowStatistics;<br>&#125;<br></code></pre></td></tr></table></figure>
+
 
                 
               </div>
