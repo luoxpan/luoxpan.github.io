@@ -7,8 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/luoxp.png">
-  <link rel="icon" href="/img/luoxp.png">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -17,16 +20,16 @@
   <meta name="keywords" content="">
   
     <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Luopan">
 <meta property="og:url" content="https://luoxpan.github.io/page/2/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Luopan">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Luoxpan">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Hexo</title>
+  <title>Luopan</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -37,11 +40,11 @@
 <!-- 主题依赖的图标库，不要自行修改 -->
 <!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
 
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
 <link  rel="stylesheet" href="/css/main.css" />
@@ -54,11 +57,15 @@
 
 
 
+  
+<link rel="stylesheet" href="/css/leetcode/iconfont.css">
+
+
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"luoxpan.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"luoxpan.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -84,7 +91,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Luoxpan</strong>
+      <strong>Fluid</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -102,7 +109,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -114,7 +121,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives/">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -126,7 +133,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -138,7 +145,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -150,7 +157,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -180,7 +187,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://api.ayao.ltd/PC/api.php') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -222,17 +229,202 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
+        
+        <a href="/2023/10/10/cpp%E9%9A%8F%E6%9C%BA%E6%95%B0/" target="_self">
+          cpp随机数
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/10/cpp%E9%9A%8F%E6%9C%BA%E6%95%B0/" target="_self">
+        <div>
+          CPP 随机数 传统的使用rand()产生随机数有许多缺点，例如受最大最小值限制，随机数分布不均匀等。C++11提供了对随机数的更好的支持。目前，向获得较好的随机数可以有一下三个步骤：  使用random_device 利用硬件生成随机种子，这种方法使用硬件，开销大，一般只用来产生随机种子 使用上述的随机种子作为随机数生成器的参数构造生成器，常用且较好的生成器为std::mt19937
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-10-10 22:05" pubdate>
+              2023-10-10
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/CPP/" class="category-chain-item">CPP</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CPP/">#CPP</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/04/07/Linux/Linux%20C++%E7%BC%96%E8%AF%91%E4%B8%8E%E8%B0%83%E8%AF%95/" target="_self">
+          Linux C++编译与调试
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/07/Linux/Linux%20C++%E7%BC%96%E8%AF%91%E4%B8%8E%E8%B0%83%E8%AF%95/" target="_self">
+        <div>
+          g++ 编译  vim show.cpp #ifndef SHOW_CPP_ #define SHOW_CPP_ #include void show(){ std::cout&lt;&lt;"hello world"&lt;&lt;endl; } #endif //end SHOW_CPP_ :n main.cpp #ifndef MAIN_CPP_ #define MAIN_CP
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-07 13:43" pubdate>
+              2023-04-07
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/linux/" class="category-chain-item">linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CPP/">#CPP</a>
+            
+              <a href="/tags/linux/">#linux</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2023/04/06/CPP%E9%9D%A2%E8%AF%95100%E9%97%AE/" target="_self">
+          CPP 面试100问
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/06/CPP%E9%9D%A2%E8%AF%95100%E9%97%AE/" target="_self">
+        <div>
+          CPP 100问 问题来源: B站up主:计算机视觉与OpenCV https://b23.tv/fPgu9kg 答案:GPT4+自己整理总结 1.include 双引号与尖括号的区别  双引号优先在当前目录查找 尖括号直接从预设的系统目录中搜索,主要用于包含标准库文件  2.常量指针和指针常量的区别  常量指针const int *p:指向常量的指针,表示不可用p更改所
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2023-04-06 16:09" pubdate>
+              2023-04-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/CPP/" class="category-chain-item">CPP</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CPP/">#CPP</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
         
         <a href="/2023/04/06/%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7valgrind/" target="_self">
           程序分析工具valgrind的使用
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt index-excerpt__noimg" href="/2023/04/06/%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7valgrind/" target="_self">
         <div>
-          参考《后台开发：核心技术与应用实践》第四章             valgrind一个C/C++程序分析器，其包括Memcheck,Callgrind,Cachegrind,Helgrind,Massif等工具  Memcheck 内存检查器，能够发现绝大多数内存错误使用情况。 Callgrind 收集程序运行时的一些数据，建立函数调用关系图 Cachegrind
+          参考《后台开发：核心技术与应用实践》第四章 valgrind 一个C/C++程序分析器，其包括Memcheck,Callgrind,Cachegrind,Helgrind,Massif等工具  Memcheck 内存检查器，能够发现绝大多数内存错误使用情况。 Callgrind 收集程序运行时的一些数据，建立函数调用关系图 Cachegrind 检查程序中缓存使用出现的问题 He
         </div>
       </a>
 
@@ -285,78 +477,17 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
-        <a href="/2023/04/06/CPP%E9%9D%A2%E8%AF%95100%E9%97%AE/" target="_self">
-          CPP 面试100问
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/06/CPP%E9%9D%A2%E8%AF%95100%E9%97%AE/" target="_self">
-        <div>
-          CPP 100问问题来源: B站up主:计算机视觉与OpenCV https://b23.tv/fPgu9kg 答案:GPT4+自己整理总结 1.include 双引号与尖括号的区别 双引号优先在当前目录查找 尖括号直接从预设的系统目录中搜索,主要用于包含标准库文件  2.常量指针和指针常量的区别 常量指针const int *p:指向常量的指针,表示不可用p更改所指向的内存区域的值. 指针常量
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-06 16:09" pubdate>
-              2023-04-06
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/CPP/" class="category-chain-item">CPP</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/CPP/">#CPP</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/01/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%974-%E4%B8%80%E4%BA%9B%E5%85%B3%E9%94%AE%E5%AD%97/" target="_self">
+        <a href="/2023/04/01/Cpp%E5%9B%B0%E6%83%91/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%974-%E4%B8%80%E4%BA%9B%E5%85%B3%E9%94%AE%E5%AD%97/" target="_self">
           CPP困惑系列4-一些关键字
         </a>
-      </h1>
+      </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/01/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%974-%E4%B8%80%E4%BA%9B%E5%85%B3%E9%94%AE%E5%AD%97/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/01/Cpp%E5%9B%B0%E6%83%91/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%974-%E4%B8%80%E4%BA%9B%E5%85%B3%E9%94%AE%E5%AD%97/" target="_self">
         <div>
-          关键字 mutable volatile     1.最常见的用法：声明类成员变量是mutable的，    用法 意味着类中的const方法可以修改这个成员 用来修饰变量，告诉编译器不要对该变量做优化，总是从内存中读取该变量真正的值。    2.用于lambda表达式中，可以直接修改以值传递的变量 该关键字无法完成线程同步。      关键字 register explicit
+          关键字 mutable volatile      1.最常见的用法：声明类成员变量是mutable的，    用法 意味着类中的const方法可以修改这个成员 用来修饰变量，告诉编译器不要对该变量做优化，总是从内存中读取该变量真正的值。    2.用于lambda表达式中，可以直接修改以值传递的变量 该关键字无法完成线程同步。
         </div>
       </a>
 
@@ -407,17 +538,17 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
-        <a href="/2023/03/31/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%973-%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" target="_self">
+        <a href="/2023/03/31/Cpp%E5%9B%B0%E6%83%91/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%973-%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" target="_self">
           CPP困惑系列3-强制类型转换
         </a>
-      </h1>
+      </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/31/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%973-%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/31/Cpp%E5%9B%B0%E6%83%91/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%973-%E5%BC%BA%E5%88%B6%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/" target="_self">
         <div>
-          C++11提供了四类强制类型转换static_cast,const_cast,dynamic_cast,reinterpret_cast。如需要类型转换时，推荐使用这4中类型转换。 总结使用原则总结使用原则，具体介绍见下文。  基本内置类型转换用static_cast void*与任意类型指针的转换用static_cast 存在继承，但不存在多态的类、类指针、类引用的上行转换，即子-&gt;父
+          C++11提供了四类强制类型转换static_cast,const_cast,dynamic_cast,reinterpret_cast。如需要类型转换时，推荐使用这4中类型转换。 总结使用原则 总结使用原则，具体介绍见下文。  基本内置类型转换用static_cast void*与任意类型指针的转换用static_cast 存在继承，但不存在多态的类、类指针、类引用的上行转换，即
         </div>
       </a>
 
@@ -468,17 +599,17 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
-        <a href="/2023/03/30/Linux%E4%B8%89%E5%89%91%E5%AE%A2/" target="_self">
+        <a href="/2023/03/30/Linux/Linux%E4%B8%89%E5%89%91%E5%AE%A2/" target="_self">
           linux三剑客grep,sed,awk
         </a>
-      </h1>
+      </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/30/Linux%E4%B8%89%E5%89%91%E5%AE%A2/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/30/Linux/Linux%E4%B8%89%E5%89%91%E5%AE%A2/" target="_self">
         <div>
-          正则表达式   元字符 描述    . 句号匹配任意单个字符除了换行符。   [ ] 字符种类。匹配方括号内的任意字符。   [^ ] 否定的字符种类。匹配除了方括号里的任意字符   * 匹配&gt;=0个重复的在*号之前的字符。   + 匹配&gt;=1个重复的+号前的字符。   ? 标记?之前的字符为可选.   {n,m} 匹配num个大括号之前的字符或字符集 (n &lt;= num &
+          正则表达式     元字符 描述     . 句号匹配任意单个字符除了换行符。   [ ] 字符种类。匹配方括号内的任意字符。   [^ ] 否定的字符种类。匹配除了方括号里的任意字符   * 匹配&gt;=0个重复的在*号之前的字符。   + 匹配&gt;=1个重复的+号前的字符。   ? 标记?之前的字符为可选.   {
         </div>
       </a>
 
@@ -529,17 +660,17 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
-        <a href="/2023/03/30/VIM%E5%9F%BA%E7%A1%80/" target="_self">
+        <a href="/2023/03/30/Linux/VIM%E5%9F%BA%E7%A1%80/" target="_self">
           vim编辑器
         </a>
-      </h1>
+      </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/30/VIM%E5%9F%BA%E7%A1%80/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/30/Linux/VIM%E5%9F%BA%E7%A1%80/" target="_self">
         <div>
-          常用123456h,j,k,l 基础移动x 删除c 删除并进入插入模式cw 删除一个词，进入插入模式ci) 删除最近的()里面的词。&lt;leader&gt;&lt;leader&gt; w : easy_motion插件的一个更方便的跳转功能。如果使用vscode-vim插件，可以直接在设置里面启动easy_motion就行。&lt;leader&gt;键也要在vscode-vim的设置里面
+          常用 123456h,j,k,l 基础移动x 删除c 删除并进入插入模式cw 删除一个词，进入插入模式ci) 删除最近的()里面的词。&lt;leader&gt;&lt;leader&gt; w : easy_motion插件的一个更方便的跳转功能。如果使用vscode-vim插件，可以直接在设置里面启动easy_motion就行。&lt;leader&gt;键也要在vscode-vim的设
         </div>
       </a>
 
@@ -590,17 +721,17 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
-        <a href="/2023/03/25/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%972-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E3%80%81%E7%A9%BA%E7%B1%BB%E3%80%81%E5%A4%9A%E6%80%81/" target="_self">
+        <a href="/2023/03/25/Cpp%E5%9B%B0%E6%83%91/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%972-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E3%80%81%E7%A9%BA%E7%B1%BB%E3%80%81%E5%A4%9A%E6%80%81/" target="_self">
           CPP困惑系列2-内存对齐、空类、多态
         </a>
-      </h1>
+      </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/25/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%972-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E3%80%81%E7%A9%BA%E7%B1%BB%E3%80%81%E5%A4%9A%E6%80%81/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/25/Cpp%E5%9B%B0%E6%83%91/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%972-%E5%86%85%E5%AD%98%E5%AF%B9%E9%BD%90%E3%80%81%E7%A9%BA%E7%B1%BB%E3%80%81%E5%A4%9A%E6%80%81/" target="_self">
         <div>
-          内存对齐内存对齐的原因 一部分原因是某些硬件平台对特定的数据只能从特定地址开始存取。 根本原因在于字节对齐可以提高CPU访问数据的效率。例如，一个int数据如果不按字节对齐，就会出现为了读取一个数据，需要CPU访问两次内存的情况，CPU访问内存所花费的时间是远远大于计算的，显然不按字节存取会造成CPU性能瓶颈  对齐原则基本类型基本类型要求起始地址是其长度的整数倍。 123456class A
+          内存对齐 内存对齐的原因  一部分原因是某些硬件平台对特定的数据只能从特定地址开始存取。 根本原因在于字节对齐可以提高CPU访问数据的效率。例如，一个int数据如果不按字节对齐，就会出现为了读取一个数据，需要CPU访问两次内存的情况，CPU访问内存所花费的时间是远远大于计算的，显然不按字节存取会造成CPU性能瓶颈  对齐原则 基本类型 基本类型要求起始地址是其长度的整数倍。
         </div>
       </a>
 
@@ -651,17 +782,17 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
-        <a href="/2023/03/25/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%971-%E5%AD%98%E5%82%A8%E6%8C%81%E7%BB%AD%E6%80%A7%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E9%93%BE%E6%8E%A5%E6%80%A7/" target="_self">
+        <a href="/2023/03/25/Cpp%E5%9B%B0%E6%83%91/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%971-%E5%AD%98%E5%82%A8%E6%8C%81%E7%BB%AD%E6%80%A7%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E9%93%BE%E6%8E%A5%E6%80%A7/" target="_self">
           CPP困惑系列1-存储持续性、作用域、链接性
         </a>
-      </h1>
+      </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/25/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%971-%E5%AD%98%E5%82%A8%E6%8C%81%E7%BB%AD%E6%80%A7%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E9%93%BE%E6%8E%A5%E6%80%A7/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/25/Cpp%E5%9B%B0%E6%83%91/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%971-%E5%AD%98%E5%82%A8%E6%8C%81%E7%BB%AD%E6%80%A7%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E9%93%BE%E6%8E%A5%E6%80%A7/" target="_self">
         <div>
-          存储持续性即变量再内存中的存在时间。C++中有三类存储持续性，C++11新增了一种。  自动存储持续性： 存储在栈区。进入代码块前存储，离开代码块就自动销毁 包括函数内部定义的局部变量和register修饰的寄存器变量 register起初表示期望编译器将该变量存入寄存器以提高性能，但不强制要求编译器这样做。因此现在的编译器都是自己决定什么时候将局部变量存入寄存器，目前绝大部分的编译器会忽略这
+          存储持续性 即变量再内存中的存在时间。C++中有三类存储持续性，C++11新增了一种。  自动存储持续性：  存储在栈区。进入代码块前存储，离开代码块就自动销毁 包括函数内部定义的局部变量和register修饰的寄存器变量 register起初表示期望编译器将该变量存入寄存器以提高性能，但不强制要求编译器这样做。因此现在的编译器都是自己决定什么时候将局部变量存入寄存器，目前绝大部
         </div>
       </a>
 
@@ -708,72 +839,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/03/25/Linux%20%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4/" target="_self">
-          Linux 基础指令
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/03/25/Linux%20%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4/" target="_self">
-        <div>
-          近期使用到的命令123456789101112#将a.cpp的内容复制到剪切板。结合windows与虚拟机的共享剪切板很好用cat a.cpp | xclip -sel clip#objdump 查看.o文件#查看.data段,.bss段有多大objdump -h a.o #查看.data段和.bss段存放了哪些内容objdump -x a.o#将一篇很长的文件筛选出部分信息#-E 为使用完全
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-03-25 17:11" pubdate>
-              2023-03-25
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/linux/" class="category-chain-item">linux</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/linux/">#linux</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+      <a class="extend prev" rel="prev" href="/"><i class="iconfont icon-arrowleft"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/3/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
@@ -828,7 +898,6 @@
   
   
   
-  
 </div>
 
   </footer>
@@ -847,7 +916,7 @@
   </script>
 
 
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
@@ -865,13 +934,13 @@
       
         jQuery.ajax({
           type: 'GET',
-          url: 'https://v1.hitokoto.cn/?c=b',
+          url: 'https://v1.hitokoto.cn/',
           headers: {},
           dataType: 'json',
           success: function(result) {
             var apiText;
             if (result) {
-              var keys = 'hitokoto'.split(',');
+              var keys = 'data,hitokoto'.split(',');
               if (result instanceof Array) {
                 result = result[0];
               }
@@ -889,7 +958,7 @@
           },
           error: function(xhr, status, error) {
             if (error) {
-              console.error('Failed to request https://v1.hitokoto.cn/?c=b:', error);
+              console.error('Failed to request https://v1.hitokoto.cn/:', error);
             }
             typing(text);
           }

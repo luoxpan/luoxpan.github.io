@@ -7,8 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/luoxp.png">
-  <link rel="icon" href="/img/luoxp.png">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -17,16 +20,16 @@
   <meta name="keywords" content="">
   
     <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="Luopan">
 <meta property="og:url" content="https://luoxpan.github.io/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="Luopan">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:author" content="Luoxpan">
 <meta name="twitter:card" content="summary_large_image">
   
   
   
-  <title>Hexo</title>
+  <title>Luopan</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -37,11 +40,11 @@
 <!-- 主题依赖的图标库，不要自行修改 -->
 <!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
 
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
 <link  rel="stylesheet" href="/css/main.css" />
@@ -54,11 +57,15 @@
 
 
 
+  
+<link rel="stylesheet" href="/css/leetcode/iconfont.css">
+
+
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"luoxpan.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"luoxpan.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -84,7 +91,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Luoxpan</strong>
+      <strong>Fluid</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -102,7 +109,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -114,7 +121,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives/">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -126,7 +133,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -138,7 +145,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -150,7 +157,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -180,7 +187,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://api.ayao.ltd/PC/api.php') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -222,17 +229,204 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
-        <a href="/2024/06/27/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E5%85%AD%E7%AB%A0/" target="_self">
-          Effective C++ 读书笔记-第六章
+        <a href="/2024/09/06/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BASDWebUI/" target="_self">
+          在没有管理员权限的Linux上部署SD-WebUI
         </a>
-      </h1>
+      </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/27/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E5%85%AD%E7%AB%A0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/06/%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%90%AD%E5%BB%BASDWebUI/" target="_self">
         <div>
-          第六章 继承与面对对象设计条款32：确定你的public继承塑模出is-a关系 public继承意味这is-a。适用于base classes身上的每一件事情一定也适用于derived classes 身上，因为每一个derived class对象也是一个base class对象。  12345678910class Bird&#123;    &#125;;class FlyingBird :
+          在没有管理员权限的Linux上部署SD-WebUI 1. 情况说明  拥有Windows 下的VSCode 拥有远程Linux服务器账号，无管理员权限：IP,端口，用户名，密码 服务器设置了防火墙，国外及一部分国内无法访问  2. Windows下载Xftp 从Windows下载需要的文件，通过Xftp传到服务器 操作很简单，下载-安装-连接（输入IP,PORT,NAME,PAS
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-09-06 16:09" pubdate>
+              2024-09-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/%E6%9D%82%E9%A1%B9/" class="category-chain-item">杂项</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/SD/">#SD</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/09/06/math/3D%E6%95%B0%E5%AD%A6/" target="_self">
+          3D 数学
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/09/06/math/3D%E6%95%B0%E5%AD%A6/" target="_self">
+        <div>
+          坐标系 笛卡尔坐标系 \((x,y,z)\) 圆柱体坐标系 \((r,\theta,z)\) \[ \begin{align*} x&amp;=r\cos\theta\\ y&amp;=r\sin\theta \end{align*} \] 球坐标系 \((r,\theta,\phi)\) \[ \begin{align*} x&amp;=r\sin\phi\cos\theta
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-09-06 16:09" pubdate>
+              2024-09-06
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Unity/" class="category-chain-item">Unity</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Math/">#Math</a>
+            
+              <a href="/tags/Unity/">#Unity</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/06/29/effective%20c++/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E5%85%AD%E7%AB%A0/" target="_self">
+          Effective C++ 读书笔记-第六章
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/29/effective%20c++/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E5%85%AD%E7%AB%A0/" target="_self">
+        <div>
+          第六章 继承与面对对象设计 条款32：确定你的public继承塑模出is-a关系  public继承意味这is-a。适用于base classes身上的每一件事情一定也适用于derived classes 身上，因为每一个derived class对象也是一个base class对象。  12345678910class Bird&#123;    &#125;;class Flyi
+        </div>
+      </a>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2024-06-29 18:41" pubdate>
+              2024-06-29
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3 d-flex align-items-center">
+            <i class="iconfont icon-category"></i>
+            
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Effective-C/" class="category-chain-item">Effective C++</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/CPP/">#CPP</a>
+            
+              <a href="/tags/Effective-C/">#Effective C++</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h2 class="index-header">
+        
+        <a href="/2024/06/27/effective%20c++/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%BA%94%E7%AB%A0/" target="_self">
+          Effective C++ 读书笔记-第五章
+        </a>
+      </h2>
+
+      
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/27/effective%20c++/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%BA%94%E7%AB%A0/" target="_self">
+        <div>
+          第五章 实现 条款26：尽可能延后变量定义式的出现时间  尽可能延后变量定义式的出现时间，直到真正需要它的时候再进行定义。这样做可增加程序的清晰度并改善程序效率。  条款27：尽量少做转型动作  如果可以，尽量避免转型，特别是在注重效率的代码中避免dynamic_cast。如果有个设计需要转型动作，试着发展无需转型的替代设计。 如果转型是必要的，试着将它隐藏在某个函数背后。客户随后
         </div>
       </a>
 
@@ -285,80 +479,17 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
-        <a href="/2024/06/23/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%BA%94%E7%AB%A0/" target="_self">
-          Effective C++ 读书笔记-第五章
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/23/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%BA%94%E7%AB%A0/" target="_self">
-        <div>
-          第五章 实现条款26：尽可能延后变量定义式的出现时间 尽可能延后变量定义式的出现时间，直到真正需要它的时候再进行定义。这样做可增加程序的清晰度并改善程序效率。  条款27：尽量少做转型动作 如果可以，尽量避免转型，特别是在注重效率的代码中避免dynamic_cast。如果有个设计需要转型动作，试着发展无需转型的替代设计。 如果转型是必要的，试着将它隐藏在某个函数背后。客户随后可以调用该函数，而不需
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-23 19:01" pubdate>
-              2024-06-23
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/Effective-C/" class="category-chain-item">Effective C++</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/CPP/">#CPP</a>
-            
-              <a href="/tags/Effective-C/">#Effective C++</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2024/06/21/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%9B%9B%E7%AB%A0/" target="_self">
+        <a href="/2024/06/21/effective%20c++/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E5%9B%9B%E7%AB%A0/" target="_self">
           Effective C++ 读书笔记-第四章
         </a>
-      </h1>
+      </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/21/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0%E7%AC%AC%E5%9B%9B%E7%AB%A0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/21/effective%20c++/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E5%9B%9B%E7%AB%A0/" target="_self">
         <div>
-          第四章 设计与声明条款18：让接口容易被正确使用，不易被误用 好的接口很容易被正确使用，不容易被误用。 “促进正确使用”的办法包括接口的一致性，以及与内置类型的行为兼容。 “阻止误用”的办法包括建立新类型、限制类型上的操作，束缚对象值，以及消除客户的资源管理责任。  12345678910111213141516171819202122232425262728struct Day&#123;
+          第四章 设计与声明 条款18：让接口容易被正确使用，不易被误用  好的接口很容易被正确使用，不容易被误用。 “促进正确使用”的办法包括接口的一致性，以及与内置类型的行为兼容。 “阻止误用”的办法包括建立新类型、限制类型上的操作，束缚对象值，以及消除客户的资源管理责任。  12345678910111213141516171819202122232425262728struct Day
         </div>
       </a>
 
@@ -366,7 +497,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-21 18:39" pubdate>
+            <time datetime="2024-06-21 19:40" pubdate>
               2024-06-21
             </time>
           </div>
@@ -411,17 +542,17 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
-        <a href="/2024/06/20/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%89%E7%AB%A0/" target="_self">
+        <a href="/2024/06/20/effective%20c++/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%89%E7%AB%A0/" target="_self">
           Effective C++ 读书笔记-第三章
         </a>
-      </h1>
+      </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/20/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%89%E7%AB%A0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2024/06/20/effective%20c++/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%89%E7%AB%A0/" target="_self">
         <div>
-          资源管理条款13：以对象管理资源 为防止资源泄露，请使用RAII对象，它们再构造函数中获得资源并在析构函数中释放资源。 两个常被使用的RAII calsses 分别是 tr1::shared_ptr 和 auto_ptr。前者通常是较佳选择，因为其copy行为比较直观。若选择auto_ptr，复制动作会使被复制指针指向null。 本条款重点在于让读者对RAII的概念有所了解，关于智能指针的使用，需
+          资源管理 条款13：以对象管理资源  为防止资源泄露，请使用RAII对象，它们再构造函数中获得资源并在析构函数中释放资源。 两个常被使用的RAII calsses 分别是 tr1::shared_ptr 和 auto_ptr。前者通常是较佳选择，因为其copy行为比较直观。若选择auto_ptr，复制动作会使被复制指针指向null。 本条款重点在于让读者对RAII的概念有所了解，关于智
         </div>
       </a>
 
@@ -429,7 +560,7 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2024-06-20 19:55" pubdate>
+            <time datetime="2024-06-20 20:38" pubdate>
               2024-06-20
             </time>
           </div>
@@ -474,17 +605,17 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2024/04/13/epub%E7%94%B5%E5%AD%90%E4%B9%A6%E5%88%B6%E4%BD%9C%E6%8C%87%E5%8D%97/" target="_self">
           epub电子书制作指南
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/04/13/epub%E7%94%B5%E5%AD%90%E4%B9%A6%E5%88%B6%E4%BD%9C%E6%8C%87%E5%8D%97/" target="_self">
         <div>
-          sigilsigil是一款epub电子书制作软件。 Dobby据说是原多看阅读App（现小米阅读）的指定epub编辑器。 使用程序自动进行处理说明：  程序会首先对txt文档进行整理，把一些不该分段的地方进行合并。然后去除每个段落的前后空格。结果输出到filename_paragraphing.txt中暂存 程序读取filename_paragraphing.txt中的内容。逐行进行处理。 根据卷
+          sigil sigil是一款epub电子书制作软件。 Dobby据说是原多看阅读App（现小米阅读）的指定epub编辑器。 使用程序自动进行处理 说明：  程序会首先对txt文档进行整理，把一些不该分段的地方进行合并。然后去除每个段落的前后空格。结果输出到filename_paragraphing.txt中暂存 程序读取filename_paragraphing.txt中的内容。逐行
         </div>
       </a>
 
@@ -507,17 +638,17 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
         <a href="/2024/03/21/Google-CPP%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/" target="_self">
           Google-CPP风格指南
         </a>
-      </h1>
+      </h2>
 
       
       <a class="index-excerpt index-excerpt__noimg" href="/2024/03/21/Google-CPP%E9%A3%8E%E6%A0%BC%E6%8C%87%E5%8D%97/" target="_self">
         <div>
-          Google-CPP风格指南命名规则 通用规则：命名要有描述性，少用缩写 文件命名：小写+下划线 my_logger.h 类型命名：给个单词首字母大写，不包含下划线 MyExcitingClass 变量（包括函数参数）和数据成员名一律小写，单词之间用下划线连接 string table_name  不管是静态的还是非静态的, 类数据成员都可以和普通变量一样, 但要接下划线.string table
+          Google-CPP风格指南 命名规则  通用规则：命名要有描述性，少用缩写 文件命名：小写+下划线 my_logger.h 类型命名：给个单词首字母大写，不包含下划线 MyExcitingClass 变量（包括函数参数）和数据成员名一律小写，单词之间用下划线连接 string table_name 不管是静态的还是非静态的, 类数据成员都可以和普通变量一样, 但要接下划线.s
         </div>
       </a>
 
@@ -568,17 +699,17 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
-        <a href="/2023/10/19/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%BA%8C%E7%AB%A0/" target="_self">
+        <a href="/2023/10/19/effective%20c++/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%BA%8C%E7%AB%A0/" target="_self">
           Effective C++ 读书笔记-第二章
         </a>
-      </h1>
+      </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/19/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%BA%8C%E7%AB%A0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/19/effective%20c++/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%BA%8C%E7%AB%A0/" target="_self">
         <div>
-          5.  了解 C++ 默默编写并调用了哪些函数 编译器可以暗自为 class 创建 default 构造函数,copy 构造函数,copy assignment 操作符,以及析构函数. 如果你打算在一个”内含reference成员”的 class 内支持赋值操作,则必须自己定义复制构造函数和赋值操作符.同样,拥有 const 成员变量的类也必须自己定义复制和赋值函数.1234567891011//
+          5. 了解 C++ 默默编写并调用了哪些函数  编译器可以暗自为 class 创建 default 构造函数,copy 构造函数,copy assignment 操作符,以及析构函数. 如果你打算在一个"内含reference成员"的 class 内支持赋值操作,则必须自己定义复制构造函数和赋值操作符.同样,拥有 const 成员变量的类也必须自己定义复制和赋值函数. 1234567
         </div>
       </a>
 
@@ -631,17 +762,17 @@
     
     
     <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
+      <h2 class="index-header">
         
-        <a href="/2023/10/17/Effective%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%80%E7%AB%A0/" target="_self">
+        <a href="/2023/10/17/effective%20c++/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%80%E7%AB%A0/" target="_self">
           Effective C++ 读书笔记-第一章
         </a>
-      </h1>
+      </h2>
 
       
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/17/Effective%20C++%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%80%E7%AB%A0/" target="_self">
+      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/17/effective%20c++/Effective%20C++%20%E8%AF%BB%E4%B9%A6%E7%AC%94%E8%AE%B0-%E7%AC%AC%E4%B8%80%E7%AB%A0/" target="_self">
         <div>
-          Effective C++ 读书笔记1. 视 C++ 为一个语言联邦C++的四个次语言:  C . Object-Oriented C++ .  面对对象 Template C++ 模板,泛型编程 STL. 标准模板库  2. 尽量以const,enum,inline替换#define 对于单纯变量,最好以 const 对象或 enums 替换#define  123456789101112131
+          Effective C++ 读书笔记 1. 视 C++ 为一个语言联邦 C++的四个次语言:  C . Object-Oriented C++ . 面对对象 Template C++ 模板,泛型编程 STL. 标准模板库  2. 尽量以const,enum,inline替换#define  对于单纯变量,最好以 const 对象或 enums 替换#define  12
         </div>
       </a>
 
@@ -690,135 +821,11 @@
     </article>
   </div>
 
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/10/10/cpp%E9%9A%8F%E6%9C%BA%E6%95%B0/" target="_self">
-          cpp随机数
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/10/10/cpp%E9%9A%8F%E6%9C%BA%E6%95%B0/" target="_self">
-        <div>
-          CPP 随机数传统的使用rand()产生随机数有许多缺点，例如受最大最小值限制，随机数分布不均匀等。C++11提供了对随机数的更好的支持。目前，向获得较好的随机数可以有一下三个步骤：  使用random_device 利用硬件生成随机种子，这种方法使用硬件，开销大，一般只用来产生随机种子 使用上述的随机种子作为随机数生成器的参数构造生成器，常用且较好的生成器为std::mt19937  使用uni
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-10-10 22:05" pubdate>
-              2023-10-10
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/CPP/" class="category-chain-item">CPP</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/CPP/">#CPP</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2023/04/07/Linux%20C++%E7%BC%96%E8%AF%91%E4%B8%8E%E8%B0%83%E8%AF%95/" target="_self">
-          Linux C++编译与调试
-        </a>
-      </h1>
-
-      
-      <a class="index-excerpt index-excerpt__noimg" href="/2023/04/07/Linux%20C++%E7%BC%96%E8%AF%91%E4%B8%8E%E8%B0%83%E8%AF%95/" target="_self">
-        <div>
-          g++ 编译  vim show.cpp#ifndef SHOW_CPP_#define SHOW_CPP_#includevoid show(){std::cout&lt;&lt;”hello world”&lt;&lt;endl;}#endif //end SHOW_CPP_   :n main.cpp#ifndef MAIN_CPP_#define MAIN_CPP_void show(
-        </div>
-      </a>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2023-04-07 13:43" pubdate>
-              2023-04-07
-            </time>
-          </div>
-        
-        
-          <div class="post-meta mr-3 d-flex align-items-center">
-            <i class="iconfont icon-category"></i>
-            
-
-<span class="category-chains">
-  
-  
-    
-      <span class="category-chain">
-        
-  <a href="/categories/linux/" class="category-chain-item">linux</a>
-  
-  
-
-      </span>
-    
-  
-</span>
-
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/linux/">#linux</a>
-            
-              <a href="/tags/CPP/">#CPP</a>
-            
-          </div>
-        
-      </div>
-    </article>
-  </div>
-
 
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 
@@ -873,7 +880,6 @@
   
   
   
-  
 </div>
 
   </footer>
@@ -892,7 +898,7 @@
   </script>
 
 
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
@@ -910,13 +916,13 @@
       
         jQuery.ajax({
           type: 'GET',
-          url: 'https://v1.hitokoto.cn/?c=b',
+          url: 'https://v1.hitokoto.cn/',
           headers: {},
           dataType: 'json',
           success: function(result) {
             var apiText;
             if (result) {
-              var keys = 'hitokoto'.split(',');
+              var keys = 'data,hitokoto'.split(',');
               if (result instanceof Array) {
                 result = result[0];
               }
@@ -934,7 +940,7 @@
           },
           error: function(xhr, status, error) {
             if (error) {
-              console.error('Failed to request https://v1.hitokoto.cn/?c=b:', error);
+              console.error('Failed to request https://v1.hitokoto.cn/:', error);
             }
             typing(text);
           }

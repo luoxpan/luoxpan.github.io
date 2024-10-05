@@ -7,8 +7,11 @@
 
 <head>
   <meta charset="UTF-8">
-  <link rel="apple-touch-icon" sizes="76x76" href="/img/luoxp.png">
-  <link rel="icon" href="/img/luoxp.png">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
@@ -16,27 +19,23 @@
   <meta name="author" content="Luoxpan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="参考《后台开发：核心技术与应用实践》第四章             valgrind一个C&#x2F;C++程序分析器，其包括Memcheck,Callgrind,Cachegrind,Helgrind,Massif等工具  Memcheck 内存检查器，能够发现绝大多数内存错误使用情况。 Callgrind 收集程序运行时的一些数据，建立函数调用关系图 Cachegrind">
+    <meta name="description" content="参考《后台开发：核心技术与应用实践》第四章 valgrind 一个C&#x2F;C++程序分析器，其包括Memcheck,Callgrind,Cachegrind,Helgrind,Massif等工具  Memcheck 内存检查器，能够发现绝大多数内存错误使用情况。 Callgrind 收集程序运行时的一些数据，建立函数调用关系图 Cachegrind 检查程序中缓存使用出现的问题 He">
 <meta property="og:type" content="article">
 <meta property="og:title" content="程序分析工具valgrind的使用">
 <meta property="og:url" content="https://luoxpan.github.io/2023/04/06/%E7%A8%8B%E5%BA%8F%E5%88%86%E6%9E%90%E5%B7%A5%E5%85%B7valgrind/index.html">
-<meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="参考《后台开发：核心技术与应用实践》第四章             valgrind一个C&#x2F;C++程序分析器，其包括Memcheck,Callgrind,Cachegrind,Helgrind,Massif等工具  Memcheck 内存检查器，能够发现绝大多数内存错误使用情况。 Callgrind 收集程序运行时的一些数据，建立函数调用关系图 Cachegrind">
+<meta property="og:site_name" content="Luopan">
+<meta property="og:description" content="参考《后台开发：核心技术与应用实践》第四章 valgrind 一个C&#x2F;C++程序分析器，其包括Memcheck,Callgrind,Cachegrind,Helgrind,Massif等工具  Memcheck 内存检查器，能够发现绝大多数内存错误使用情况。 Callgrind 收集程序运行时的一些数据，建立函数调用关系图 Cachegrind 检查程序中缓存使用出现的问题 He">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://raw.githubusercontent.com/XingpanLuo/PictureBed/main/image-20230406162751586.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/XingpanLuo/PictureBed/main/image-20230406163722777.png">
-<meta property="og:image" content="https://raw.githubusercontent.com/XingpanLuo/PictureBed/main/image-20230406165225358.png">
 <meta property="article:published_time" content="2023-04-06T08:09:28.000Z">
-<meta property="article:modified_time" content="2023-04-06T08:54:41.067Z">
+<meta property="article:modified_time" content="2024-10-05T07:47:56.884Z">
 <meta property="article:author" content="Luoxpan">
 <meta property="article:tag" content="CPP">
 <meta property="article:tag" content="valgrind">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://raw.githubusercontent.com/XingpanLuo/PictureBed/main/image-20230406162751586.png">
   
   
   
-  <title>程序分析工具valgrind的使用 - Hexo</title>
+  <title>程序分析工具valgrind的使用 - Luopan</title>
 
   <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
 
@@ -53,11 +52,11 @@
 <!-- 主题依赖的图标库，不要自行修改 -->
 <!-- Do not modify the link that theme dependent icons -->
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_hj8rtnfg7um.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
 
 
 
-<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_lbnruvf0jn.css">
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
 
 
 <link  rel="stylesheet" href="/css/main.css" />
@@ -70,11 +69,15 @@
 
 
 
+  
+<link rel="stylesheet" href="/css/leetcode/iconfont.css">
+
+
 
   <script id="fluid-configs">
     var Fluid = window.Fluid || {};
     Fluid.ctx = Object.assign({}, Fluid.ctx)
-    var CONFIG = {"hostname":"luoxpan.github.io","root":"/","version":"1.9.4","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false}},"search_path":"/local-search.xml"};
+    var CONFIG = {"hostname":"luoxpan.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
 
     if (CONFIG.web_analytics.follow_dnt) {
       var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
@@ -100,7 +103,7 @@
   <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand" href="/">
-      <strong>Luoxpan</strong>
+      <strong>Fluid</strong>
     </a>
 
     <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
@@ -118,7 +121,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/">
+              <a class="nav-link" href="/" target="_self">
                 <i class="iconfont icon-home-fill"></i>
                 <span>首页</span>
               </a>
@@ -130,7 +133,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/archives/">
+              <a class="nav-link" href="/archives/" target="_self">
                 <i class="iconfont icon-archive-fill"></i>
                 <span>归档</span>
               </a>
@@ -142,7 +145,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/categories/">
+              <a class="nav-link" href="/categories/" target="_self">
                 <i class="iconfont icon-category-fill"></i>
                 <span>分类</span>
               </a>
@@ -154,7 +157,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/tags/">
+              <a class="nav-link" href="/tags/" target="_self">
                 <i class="iconfont icon-tags-fill"></i>
                 <span>标签</span>
               </a>
@@ -166,7 +169,7 @@
           
           
             <li class="nav-item">
-              <a class="nav-link" href="/about/">
+              <a class="nav-link" href="/about/" target="_self">
                 <i class="iconfont icon-user-fill"></i>
                 <span>关于</span>
               </a>
@@ -196,7 +199,7 @@
   
 
 <div id="banner" class="banner" parallax=true
-     style="background: url('https://api.ayao.ltd/PC/api.php') no-repeat center center; background-size: cover;">
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
   <div class="full-bg-img">
     <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
       <div class="banner-text text-center fade-in-up">
@@ -225,7 +228,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          1.6k 字
+          580 字
         
       </span>
     
@@ -236,7 +239,7 @@
         
         
         
-          14 分钟
+          5 分钟
         
       </span>
     
@@ -273,19 +276,15 @@
       <div class="container nopadding-x-md" id="board-ctn">
         <div id="board">
           <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none">程序分析工具valgrind的使用</h1>
+            <h1 id="seo-header">程序分析工具valgrind的使用</h1>
             
             
               <div class="markdown-body">
                 
                 <span id="more"></span>
-
-<div class="note note-info">
-            <p>参考《后台开发：核心技术与应用实践》第四章</p>
-          </div>
-
-<h1 id="valgrind"><a href="#valgrind" class="headerlink" title="valgrind"></a>valgrind</h1><p>一个C/C++程序分析器，其包括Memcheck,Callgrind,Cachegrind,Helgrind,Massif等工具</p>
+<p>参考《后台开发：核心技术与应用实践》第四章</p>
+<h1 id="valgrind">valgrind</h1>
+<p>一个C/C++程序分析器，其包括Memcheck,Callgrind,Cachegrind,Helgrind,Massif等工具</p>
 <ul>
 <li>Memcheck 内存检查器，能够发现绝大多数内存错误使用情况。</li>
 <li>Callgrind 收集程序运行时的一些数据，建立函数调用关系图</li>
@@ -293,26 +292,35 @@
 <li>Helgrind 检查多线程程序中出现的竞争问题</li>
 </ul>
 <p>本文主要介绍使用valgrind进行内存检查。</p>
-<h3 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h3><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> update<br>sudo apt-<span class="hljs-built_in">get</span> install valgrind<br></code></pre></td></tr></table></figure>
-
-<h3 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h3><p>默认使用memcheck工具。如果要使用其它工具，用<code>--tool=tool name</code>指定.如<code>--tool=helgrind</code></p>
+<h3 id="安装">安装</h3>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs routeros">sudo apt-<span class="hljs-built_in">get</span> update<br>sudo apt-<span class="hljs-built_in">get</span> install valgrind<br></code></pre></td></tr></table></figure>
+<h3 id="使用">使用</h3>
+<p>默认使用memcheck工具。如果要使用其它工具，用<code>--tool=tool name</code>指定.如<code>--tool=helgrind</code></p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">valgrind ./main<br></code></pre></td></tr></table></figure>
-
-<h3 id="示例"><a href="#示例" class="headerlink" title="示例"></a>示例</h3><ol>
+<h3 id="示例">示例</h3>
+<ol type="1">
 <li>使用未初始化的内存</li>
 </ol>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs python">/*<br> *使用未初始化的内存<br> */<br><span class="hljs-comment">#include &lt;iostream&gt;</span><br><br><span class="hljs-built_in">int</span> main()&#123;<br>        <span class="hljs-built_in">int</span> a[<span class="hljs-number">5</span>];<br>        <span class="hljs-built_in">int</span> i,s=<span class="hljs-number">0</span>;<br>        a[<span class="hljs-number">0</span>]=a[<span class="hljs-number">1</span>]=a[<span class="hljs-number">3</span>]=a[<span class="hljs-number">4</span>]=<span class="hljs-number">0</span>;<br>        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">5</span>;i++)&#123;<br>                s=s+a[i];<br>                <span class="hljs-keyword">if</span>(s==<span class="hljs-number">33</span>)&#123;<br>                        std::cout&lt;&lt;<span class="hljs-string">&quot;sum is 33&quot;</span>&lt;&lt;std::endl;<br>                &#125;<br>                <span class="hljs-keyword">else</span>&#123;<br>                        std::cout&lt;&lt;<span class="hljs-string">&quot;sum is not 33&quot;</span>&lt;&lt;std::endl;<br>                &#125;<br>        &#125;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br>/* 运行结果<br>lumos@ubu:valgrind$ g++ test2.cpp -g -o test2<br>lumos@ubu:valgrind$ ./test2<br><span class="hljs-built_in">sum</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-number">33</span><br><span class="hljs-built_in">sum</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-number">33</span><br><span class="hljs-built_in">sum</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-number">33</span><br><span class="hljs-built_in">sum</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-number">33</span><br><span class="hljs-built_in">sum</span> <span class="hljs-keyword">is</span> <span class="hljs-keyword">not</span> <span class="hljs-number">33</span><br><br>*/<br></code></pre></td></tr></table></figure>
-
 <p>使用valgrind进行检查：</p>
 <p><code>valgrid ./test2</code></p>
-<p><img src="https://raw.githubusercontent.com/XingpanLuo/PictureBed/main/image-20230406162751586.png" srcset="/img/loading.gif" lazyload alt="image-20230406162751586"></p>
-<ol start="2">
+<figure>
+<img
+src="https://raw.githubusercontent.com/XingpanLuo/PictureBed/main/image-20230406162751586.png" srcset="/img/loading.gif" lazyload
+alt="image-20230406162751586" />
+<figcaption aria-hidden="true">image-20230406162751586</figcaption>
+</figure>
+<ol start="2" type="1">
 <li>内存读写越界</li>
 </ol>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> * 内存读写越界</span><br><span class="hljs-comment"> * pt只有四个元素，但后面的for循环使p指向了pt数组外的地址</span><br><span class="hljs-comment"> * 可能导致程序出现不可预期的错误</span><br><span class="hljs-comment"> * 这种错误很难用肉眼发现，但valgrind很容易的发现了问题</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-type">int</span> len=<span class="hljs-number">4</span>;<br>        <span class="hljs-type">int</span> *pt=(<span class="hljs-type">int</span> *)<span class="hljs-built_in">malloc</span>(len*<span class="hljs-built_in">sizeof</span>(<span class="hljs-type">int</span>));<br>        <span class="hljs-type">int</span> *p=pt;<br>        <span class="hljs-keyword">for</span>(<span class="hljs-type">int</span> i=<span class="hljs-number">0</span>;i&lt;len;i++)&#123;<br>                p++;<br>        &#125;<br>        *p=<span class="hljs-number">5</span>;<br>        std::cout&lt;&lt;<span class="hljs-string">&quot;the value of p is &quot;</span>&lt;&lt;*p&lt;&lt;std::endl;<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/XingpanLuo/PictureBed/main/image-20230406163722777.png" srcset="/img/loading.gif" lazyload alt="image-20230406163722777"></p>
-<ol start="3">
+<figure>
+<img
+src="https://raw.githubusercontent.com/XingpanLuo/PictureBed/main/image-20230406163722777.png" srcset="/img/loading.gif" lazyload
+alt="image-20230406163722777" />
+<figcaption aria-hidden="true">image-20230406163722777</figcaption>
+</figure>
+<ol start="3" type="1">
 <li>动态内存管理错误</li>
 </ol>
 <p>常见的内存管理错误：</p>
@@ -322,8 +330,8 @@
 <li>释放后仍然读写。如果内存被释放后再访问，可能覆盖其它部分的信息，这是严重的错误</li>
 </ul>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs cpp"><span class="hljs-comment">/*</span><br><span class="hljs-comment"> *动态内存管理错误</span><br><span class="hljs-comment"> * 下面的代码包含了多种动态内存错误</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">#<span class="hljs-keyword">include</span> <span class="hljs-string">&lt;iostream&gt;</span></span><br><br><span class="hljs-function"><span class="hljs-type">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span>&#123;<br>        <span class="hljs-type">int</span> i;<br>        <span class="hljs-type">char</span> *p=(<span class="hljs-type">char</span> *)<span class="hljs-built_in">malloc</span>(<span class="hljs-number">10</span>);<br>        <span class="hljs-type">char</span> *pt=p;<br>        <span class="hljs-keyword">for</span>(i=<span class="hljs-number">0</span>;i&lt;<span class="hljs-number">10</span>;i++)&#123;<br>                p[i]=<span class="hljs-string">&#x27;z&#x27;</span>;<br>        &#125;<br>        <span class="hljs-keyword">delete</span> p;<br>        pt[<span class="hljs-number">1</span>]=<span class="hljs-string">&#x27;x&#x27;</span>;<br>        <span class="hljs-built_in">free</span>(pt);<br>        <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>&#125;<br></code></pre></td></tr></table></figure>
-
-<p><img src="https://raw.githubusercontent.com/XingpanLuo/PictureBed/main/image-20230406165225358.png" srcset="/img/loading.gif" lazyload></p>
+<p><img
+src="https://raw.githubusercontent.com/XingpanLuo/PictureBed/main/image-20230406165225358.png" srcset="/img/loading.gif" lazyload /></p>
 
                 
               </div>
@@ -357,9 +365,9 @@
     <div class="post-meta">
       <i class="iconfont icon-tags"></i>
       
-        <a href="/tags/CPP/">#CPP</a>
+        <a href="/tags/CPP/" class="print-no-link">#CPP</a>
       
-        <a href="/tags/valgrind/">#valgrind</a>
+        <a href="/tags/valgrind/" class="print-no-link">#valgrind</a>
       
     </div>
   
@@ -395,9 +403,9 @@
             
               
               
-                <a target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
                   <span class="hint--top hint--rounded" aria-label="BY - 署名">
-                    <i class="iconfont icon-by"></i>
+                    <i class="iconfont icon-cc-by"></i>
                   </span>
                 </a>
               
@@ -416,9 +424,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2023/04/07/Linux%20C++%E7%BC%96%E8%AF%91%E4%B8%8E%E8%B0%83%E8%AF%95/" title="Linux C++编译与调试">
+                      <a href="/2023/04/06/CPP%E9%9D%A2%E8%AF%95100%E9%97%AE/" title="CPP 面试100问">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">Linux C++编译与调试</span>
+                        <span class="hidden-mobile">CPP 面试100问</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -426,8 +434,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2023/04/06/CPP%E9%9D%A2%E8%AF%95100%E9%97%AE/" title="CPP 面试100问">
-                        <span class="hidden-mobile">CPP 面试100问</span>
+                      <a href="/2023/04/01/Cpp%E5%9B%B0%E6%83%91/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%974-%E4%B8%80%E4%BA%9B%E5%85%B3%E9%94%AE%E5%AD%97/" title="CPP困惑系列4-一些关键字">
+                        <span class="hidden-mobile">CPP困惑系列4-一些关键字</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
@@ -438,37 +446,6 @@
             </div>
 
             
-  
-  
-    <article id="comments" lazyload>
-      
-  <div id="valine"></div>
-  <script type="text/javascript">
-    Fluid.utils.loadComments('#valine', function() {
-      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
-        var options = Object.assign(
-          {"appId":"9B0pagOE6I5saf1r2ysYAwBl-gzGzoHsz","appKey":"QIFnh0LADcmuLHa3l8PI0tNy","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"https://luoxpan.github.io/","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
-          {
-            el: "#valine",
-            path: window.location.pathname
-          }
-        )
-        new Valine(options);
-        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
-          var imgSelector = '#valine .vcontent img:not(.vemoji)';
-          Fluid.plugins.imageCaption(imgSelector);
-          Fluid.plugins.fancyBox(imgSelector);
-        })
-      });
-    });
-  </script>
-  <noscript>Please enable JavaScript to view the comments</noscript>
-
-
-    </article>
-  
-
-
           </article>
         </div>
       </div>
@@ -566,7 +543,6 @@
   
   
   
-  
 </div>
 
   </footer>
@@ -585,7 +561,7 @@
   </script>
 
 
-<script  src="https://lib.baomitu.com/jquery/3.6.0/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
 <script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
 <script  src="/js/events.js" ></script>
 <script  src="/js/plugins.js" ></script>
@@ -618,7 +594,7 @@
 
   
 <script>
-  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.18.2/tocbot.min.js', function() {
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
     var toc = jQuery('#toc');
     if (toc.length === 0 || !window.tocbot) { return; }
     var boardCtn = jQuery('#board-ctn');
@@ -663,7 +639,7 @@
 
   
 <script>
-  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/4.3.1/anchor.min.js', function() {
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
     window.anchors.options = {
       placement: CONFIG.anchorjs.placement,
       visible  : CONFIG.anchorjs.visible

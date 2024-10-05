@@ -1,0 +1,682 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Luoxpan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="近期使用到的命令 123456789101112#将a.cpp的内容复制到剪切板。结合windows与虚拟机的共享剪切板很好用cat a.cpp | xclip -sel clip#objdump 查看.o文件#查看.data段,.bss段有多大objdump -h a.o #查看.data段和.bss段存放了哪些内容objdump -x a.o#将一篇很长的文件筛选出部分信息#-E 为使用">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux 基础指令">
+<meta property="og:url" content="https://luoxpan.github.io/2023/03/25/Linux/Linux%20%E5%9F%BA%E7%A1%80%E6%8C%87%E4%BB%A4/index.html">
+<meta property="og:site_name" content="Luopan">
+<meta property="og:description" content="近期使用到的命令 123456789101112#将a.cpp的内容复制到剪切板。结合windows与虚拟机的共享剪切板很好用cat a.cpp | xclip -sel clip#objdump 查看.o文件#查看.data段,.bss段有多大objdump -h a.o #查看.data段和.bss段存放了哪些内容objdump -x a.o#将一篇很长的文件筛选出部分信息#-E 为使用">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2023-03-25T09:11:00.000Z">
+<meta property="article:modified_time" content="2023-03-25T14:59:04.000Z">
+<meta property="article:author" content="Luoxpan">
+<meta property="article:tag" content="linux">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>Linux 基础指令 - Luopan</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/leetcode/iconfont.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"luoxpan.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="Linux 基础指令"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2023-03-25 17:11" pubdate>
+          2023年3月25日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          2.3k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          20 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">Linux 基础指令</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+<h2 id="近期使用到的命令">近期使用到的命令</h2>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#将a.cpp的内容复制到剪切板。结合windows与虚拟机的共享剪切板很好用</span><br><span class="hljs-built_in">cat</span> a.cpp | xclip -sel clip<br><span class="hljs-comment">#objdump 查看.o文件</span><br><span class="hljs-comment">#查看.data段,.bss段有多大</span><br>objdump -h a.o <br><span class="hljs-comment">#查看.data段和.bss段存放了哪些内容</span><br>objdump -x a.o<br><span class="hljs-comment">#将一篇很长的文件筛选出部分信息</span><br><span class="hljs-comment">#-E 为使用完全的正则表达式</span><br><span class="hljs-comment">#[system] 出现行及其下面两行。[system.cpu]出现的行及其下面两行</span><br>grep -E <span class="hljs-string">&quot;^\[(\w*)\]$|^\[(\w*)\.(\w*)\]$&quot;</span> -A 2 a.txt<br><br></code></pre></td></tr></table></figure>
+<ul>
+<li>whoami 显示当前登录的用户</li>
+<li>hostname 显示当前机器的主机名</li>
+<li>pwd 显示当前的工作目录绝对路劲 <a name="goNBT"></a> ## cd命令
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">.   当前目录<br>..  上一级目录<br>/   根目录<br>~   用户目录<br>-   上一次工作目录<br><br></code></pre></td></tr></table></figure> <a name="OR86w"></a> ## ls命令 : 打印目录文件及文件夹信息
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">ls</span> [选项] [路径]<br><span class="hljs-built_in">ls</span> -a  显示隐藏文件<br><span class="hljs-built_in">ls</span> -l   显示详细信息<br><span class="hljs-built_in">ls</span> -hl  显示详细信息，包括人类可读的内存占用<br></code></pre></td></tr></table></figure> <a name="COQAK"></a> ## su
+切换用户<code>su - 用户名</code> <a name="IHYp0"></a> ##
+logout退出当前用户登录 <code>logout</code> <a name="mUsEq"></a> ## mkdir
+新建文件夹 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mkdir</span> [选项] [目录]<br><span class="hljs-built_in">mkdir</span> dir1		创建文件夹<br><span class="hljs-built_in">mkdir</span> &#123;dir1,dir2,dir3&#125;	创建多个文件夹<br><span class="hljs-built_in">mkdir</span> -p ./dir1/dir2/dir3 就算没有dir1,dir2，也可以递归创建出dir1,dir2,dir3<br><span class="hljs-built_in">mkdir</span> <span class="hljs-built_in">dir</span>&#123;1..10&#125;   创建10个文件夹dir1,dir2,...,dir10<br></code></pre></td></tr></table></figure> <a name="wCQGf"></a> ## touch
+创建普通文件、修改文件事件 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">touch</span> [选项] [文件名]<br><span class="hljs-built_in">touch</span> a.txt b.py c.cpp<br><span class="hljs-built_in">touch</span> text&#123;a..z&#125;.txt  main&#123;1..3&#125;.cpp<br><span class="hljs-built_in">touch</span> -t 03160910 a.txt 修改文件的修改时间为3月16日9点10分<br></code></pre></td></tr></table></figure> <a name="Pv1Vo"></a> ## cp 复制
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">cp</span> [选项] 源文件 目标文件<br><span class="hljs-built_in">cp</span> a.txt b.cpp c.py ./dir/	复制多个文件到目标文件夹<br><span class="hljs-built_in">cp</span> -r dir1 dir2 复制整个文件夹需要加上-r参数<br><span class="hljs-built_in">cp</span> -d a.out b.out 复制，保存软连接不变<br><span class="hljs-built_in">cp</span> -i 复制前询问，防止意外覆盖<br></code></pre></td></tr></table></figure> <a name="jL2Dm"></a> ## mv 移动文件、重命名文件
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">mv</span> [选项] [一个或多个源文件] 目标文件或目录<br><span class="hljs-built_in">mv</span> a.txt b.cpp ./dir/  移动一个或多个文件到目标目录<br><span class="hljs-built_in">mv</span> *.cpp ./dir/ <br><span class="hljs-built_in">mv</span> a.txt aa.txt 重命名文件<br></code></pre></td></tr></table></figure> <a name="vsPL2"></a> ## rm 删除 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">rm</span> [选项] 文件<br><span class="hljs-built_in">rm</span> a.txt 删除文件<br><span class="hljs-built_in">rm</span> a.txt b.txt<br><span class="hljs-built_in">rm</span> text*.txt  <br><span class="hljs-built_in">rm</span> -r <span class="hljs-built_in">dir</span> 递归删除目录<br><span class="hljs-built_in">rm</span> -d dir0 只能用来删除空文件夹<br><span class="hljs-built_in">rm</span> -f abb* 强制删除所有以abb开头的文件<br><span class="hljs-built_in">rm</span> -r -f ./*   强制删除当前目录下的所有内容<br></code></pre></td></tr></table></figure>
+<a name="o0Mey"></a> ## 终端快捷键 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">ctrl+a 回到命令行开头<br>ctrl+e 命令行结尾<br>ctrl+l 清空<br>ctrl+d 从光标出删除一个字符<br></code></pre></td></tr></table></figure> <a name="WfYQy"></a> ##
+重定向符号 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs bash">1.读取文件内容，写入另一个文件中<br><span class="hljs-built_in">cat</span> src.txt &gt; dest.txt	重定向输出覆盖<br><span class="hljs-built_in">cat</span> src.txt &gt;&gt; dest.txt 重定向追加<br>2.重定向写入符<br><span class="hljs-built_in">cat</span> &lt; src.txt  <br>将文本内容拆分<br>xargs -n 3 &lt; src.txt 限制每行只能输出3个字符<br><span class="hljs-built_in">cat</span> &gt;&gt; dest.txt &lt;&lt;<span class="hljs-string">EOF</span><br><span class="hljs-string">cat -n a.txt 显示行号，参数-n</span><br></code></pre></td></tr></table></figure> <a name="StbNt"></a> ## cat 查看文本内容
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">1.查看文本内容<br><span class="hljs-built_in">cat</span> file.txt<br>-b 对非空行显示行号<br>-n 对所有行显示行号<br>2. 多个文件合并<br><span class="hljs-built_in">cat</span> file1.txt file2.txt &gt; file3.txt<br>3.非交互式编辑或追加内容<br><span class="hljs-built_in">cat</span> &gt;&gt; file.txt &lt;&lt; <span class="hljs-string">EOF 这是追加内容 EOF</span><br>4.清空文件内容<br><span class="hljs-built_in">cat</span> /dev/null &gt; file.txt<br><br></code></pre></td></tr></table></figure> <a name="Q3qws"></a> ## head 查看文件开头几行
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">head</span> a.txt  查看前10行<br><span class="hljs-built_in">head</span> -n 5 a.txt 查看前5行<br><span class="hljs-built_in">head</span> -n -5 a.txt 查看倒数第5行之前所有<br></code></pre></td></tr></table></figure> <a name="LYV36"></a> ## tail 查看文件末尾几行
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs bash">能实时刷新显示a.txt的末尾变化<br><span class="hljs-built_in">tail</span> -F a.txt<br></code></pre></td></tr></table></figure> <a name="llDrz"></a> ## stat 查看文件详细信息
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">查看文件详细信息<br>-f : 显示文件系统状态而非文件状态<br>-t : 以简洁方式输出<br></code></pre></td></tr></table></figure> <a name="vaq5n"></a> ## chmod 权限设置 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">r,w,x : 读、写、执行<br>用户-用户所在组-所有<br>111=7 可读可写可执行<br>110=6 可读可写不可执行<br>010=2 只可写<br><span class="hljs-built_in">chmod</span> 777 a.txt <br></code></pre></td></tr></table></figure>
+<a name="ZKXQ0"></a> ## find 查找 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs bash">find 路径 选项 文件名<br>搜索*.txt与*.cpp 但过滤a.*<br>-a 与；-o 或；-not 非<br>！！！注意空格！！！每个\(或\)的左后两边都要有空格。指令与指令之间也要有空格<br>find . \( -not -name <span class="hljs-string">&quot;a.*&quot;</span> \) -a \( -name <span class="hljs-string">&quot;*.txt&quot;</span> -o -name <span class="hljs-string">&quot;*.cpp&quot;</span> \) <br>根据正则表达式查找<br>find . -regex <span class="hljs-string">&quot;.*\(\.txt\|\.pdf\)$&quot;</span><br>-ok 执行后面的指令，并询问是否确定执行&#123;&#125; 中的是find找到的内容 <br>-<span class="hljs-built_in">exec</span> 执行后面的指令，不询问<br>注意以\;结尾<br>删除*.txt并逐一询问是否确定删除<br>find . -name <span class="hljs-string">&quot;*.txt&quot;</span> -ok <span class="hljs-built_in">rm</span> &#123;&#125; \;<br>合并所有*.txt到all.txt<br>find . -<span class="hljs-built_in">type</span> f -name <span class="hljs-string">&quot;*.txt&quot;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">cat</span> &#123;&#125; &gt; all.txt \;<br>-<span class="hljs-built_in">type</span> f 文件 -<span class="hljs-built_in">type</span> d 文件夹<br>将30天前的<span class="hljs-built_in">log</span>文件移动到old目录<br>find . -<span class="hljs-built_in">type</span> f -mtime +30 -name <span class="hljs-string">&quot;*.log&quot;</span> -<span class="hljs-built_in">exec</span> <span class="hljs-built_in">cp</span> &#123;&#125; old \;<br>-atime 访问时间<br>-ctime 改变事件 +30超过30天，-5 5天内，5 正好5天前<br></code></pre></td></tr></table></figure> <a name="Sr17b"></a> ##
+通配符 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">? 匹配一个任意字符<br>* 匹配0个或多个任意字符<br>[] 匹配中括号中的任意一个字符，例如[abc]匹配a或b或c<br>[a-m] [2-4] 匹配范围内的任意一个字符<br>[^] 逻辑非。例如[a^1-9].txt   匹配a.txt,但不匹配a1.txt,a2.txt<br>^ 匹配行首<br>$ 匹配行尾<br></code></pre></td></tr></table></figure> <a name="arZ3I"></a> ## grep 搜索匹配并打印
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs bash">在文件内搜索匹配<br>grep <span class="hljs-string">&quot;match_pattern&quot;</span> file1.txt file2.txt<br>递归搜索当前目录及所有子目录中的问价<br>grep -r <span class="hljs-string">&quot;match_pattern&quot;</span><br>正则匹配输出以数字开头的所有行<br>grep <span class="hljs-string">&quot;^[0-9].*&quot;</span> file.txt<br></code></pre></td></tr></table></figure> <a name="HEj5C"></a> ## tar 压缩和解压缩 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-comment">#=======================&quot;.tar&quot;格式=========================</span><br><span class="hljs-comment">#打包不会压缩</span><br>tar -cvf anaconda-ks.cfg.tar anaconda-ks.cfg<br><span class="hljs-comment">#解打包到当前目录</span><br>tar -xvf anaconda-ks.cfg.tar<br><span class="hljs-comment">#解打包到指定目录</span><br>tar -xvf anaconda-ks.cfg.tar -C /testdir/<br><br><span class="hljs-comment">#=====================&quot;.tar.gz&quot;格式=====================</span><br><span class="hljs-comment">#把/tmp/目录直接打包并压缩为&quot;.tar.gz&quot;格式</span><br>tar -zcvf tmp.tar.gz /tmp/<br><span class="hljs-comment">#解压缩并解打包&quot;.tar.gz&quot;格式文件</span><br>tar -zxvf tmp.tar.gz<br></code></pre></td></tr></table></figure>
+<a name="KsbWb"></a> ## cut 分割 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">a.txt的每行的第4-7个字符<br><span class="hljs-built_in">cut</span> -c 4-7 a.txt<br><span class="hljs-built_in">cut</span> -c 5,6 a.txt 每行的第5个和第6个字符<br><span class="hljs-built_in">cut</span> -c -6 a.txt 每行的前6个字符<br>a.txt每行用:分割。取出分割结果的1-3个<br><span class="hljs-built_in">cut</span> -d <span class="hljs-string">&quot;:&quot;</span> -f 1-3 a.txt<br><span class="hljs-built_in">cut</span> -d <span class="hljs-string">&quot;:&quot;</span> -f 3- a.txt 分割结果的第三个到最后<br></code></pre></td></tr></table></figure> <a name="hMHfX"></a> ##
+paste 合并 与cut相反 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs bash">两个文件按列合并<br><span class="hljs-built_in">paste</span> a.txt b.txt<br>按列合并，并用 : 连接<br><span class="hljs-built_in">paste</span> -d <span class="hljs-string">&quot;:&quot;</span> a.txt b.txt<br></code></pre></td></tr></table></figure> <a name="D7hDp"></a> ## sort 排序
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs bash">1.对文件进行排序<br><span class="hljs-built_in">sort</span> a.txt 数字排在前面，字母排在后面<br><span class="hljs-built_in">sort</span> -r a.txt 逆序（从大到小）<br>2. 对文件每行按照第一个字符按照数字排序。如果第一个字符不是数字，就认为是数字0<br><span class="hljs-built_in">sort</span> -n a.txt 默认从小到大排序<br><span class="hljs-built_in">sort</span> -nr a.txt 从大到小排序<br>3.对排序结果去重<br><span class="hljs-built_in">sort</span> -u a.txt<br>4.指定分割符号,指定区域进行排序<br><span class="hljs-built_in">sort</span> -n -t <span class="hljs-string">&quot;.&quot;</span> -k 4 ip.txt<br></code></pre></td></tr></table></figure> <a name="fOoXm"></a> ## uniq 去重 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">1.去除连续出现的行<br><span class="hljs-built_in">uniq</span> a.txt<br><span class="hljs-built_in">uniq</span> -c a.txt 显示重复出现的次数<br>2.一般结合<span class="hljs-built_in">sort</span>使用<br><span class="hljs-built_in">sort</span> -n a.txt | <span class="hljs-built_in">uniq</span> -c<br>3.找出只出现一次的行<br><span class="hljs-built_in">sort</span> -n a.txt | <span class="hljs-built_in">uniq</span> -c -u<br></code></pre></td></tr></table></figure>
+<a name="v5hCo"></a> ## wc 单词统计 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">1.统计文件的行数<br><span class="hljs-built_in">wc</span> -l a.txt<br>2.统计单词数量<br><span class="hljs-built_in">wc</span> -w a.txt<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;test1 test2&quot;</span> | <span class="hljs-built_in">wc</span> -w 结果为2两个单词<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;好 啊 不好&quot;</span> | <span class="hljs-built_in">wc</span> -w 结果为3<br>3.统计字符数(包括结尾的$符号<br><span class="hljs-built_in">wc</span> -m a.txt<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;test&quot;</span> | <span class="hljs-built_in">wc</span> -m  结果为5<br>4.输出最长行的字符数<br><span class="hljs-built_in">cat</span> a.txt | <span class="hljs-built_in">wc</span> -L<br></code></pre></td></tr></table></figure> <a name="JwKbv"></a>
+## tr 从标准输入中替换、所见或删除字符，将结果写到标准输出
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs bash">1. 替换一部分字符<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;my name is lumos&quot;</span> | <span class="hljs-built_in">tr</span> <span class="hljs-string">&#x27;[a-z]&#x27;</span> <span class="hljs-string">&#x27;[A-Z]&#x27;</span><br><span class="hljs-comment">#MY NAME IS LUMOS</span><br>2.删除一部分字符 -d 选项<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;my name is lumos and i an 21 years old&quot;</span> | <span class="hljs-built_in">tr</span> -d <span class="hljs-string">&#x27;a-z&#x27;</span><br><span class="hljs-comment">#21</span><br>3.把文件中的内容进行替换(把文件当作标准输入<br><span class="hljs-built_in">tr</span> <span class="hljs-string">&#x27;a&#x27;</span> <span class="hljs-string">&#x27;A&#x27;</span> &lt; a.txt<br>4.去除连续重复字符 -s选项<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;iii am lllumoos&quot;</span> | <span class="hljs-built_in">tr</span> -s  <span class="hljs-string">&#x27;ialo&#x27;</span><br><span class="hljs-comment">#i am lumos</span><br></code></pre></td></tr></table></figure> <a name="UZMmi"></a> ## xargs 管道命令，构造参数等
+简单的说就是，把其它命令给他的数据，传递给它后面的命令作为参数
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs bash">a.txt:<br>1 2<br>3 4 5<br>1.多行连接输出<br>xargs &lt; a.txt<br><span class="hljs-comment">#1 2 3 4 5 </span><br>2.-n 每行最多输出原来的n行<br>xargs -n &lt; a.txt<br>3. -d 分割<br><span class="hljs-built_in">echo</span> <span class="hljs-string">&quot;a,b,c&quot;</span> | xargs -d <span class="hljs-string">&quot;,&quot;</span> -n 2<br>3. -i &#123;&#125;替代传输的数据<br>将当前所有的txt文件，移动到<span class="hljs-built_in">dir</span>目录<br>find . -name <span class="hljs-string">&quot;*.txt&quot;</span> | xargs -i <span class="hljs-built_in">mv</span> &#123;&#125; <span class="hljs-built_in">dir</span>/<br>4. -I 用字符串替换数据<br>find . -name <span class="hljs-string">&quot;*.txt&quot;</span> | xargs -I alltxt <span class="hljs-built_in">mv</span> alltxt <span class="hljs-built_in">dir</span>/<br></code></pre></td></tr></table></figure> <a name="j9Hxv"></a> ## join 合并 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs bash">只能对排序好的文件使用<br>将两个文件，按照某列为匹配字段进行合并<br>依照a文件的ID1段和b文件ID2段进行合并,指定分隔符为<span class="hljs-string">&quot; &quot;</span> <br><span class="hljs-built_in">join</span> -1 ID1 -2 ID2 -t <span class="hljs-string">&quot; &quot;</span> a.txt b.txt &gt; c.txt<br>a.txt<br>zhou 2000 1<br>li 2500 2<br>wan 2000 2<br>zhan 2600 2<br>b.txt <br>zhou c 1<br>zhan java 2<br>wan php 3<br><br>c.txt<br>1 zhou 2000 zhou c<br>2 li 2500 zhan java<br>2 wan 2000 zhan java<br>2 zhan 2600 zhan java<br></code></pre></td></tr></table></figure>
+<a name="pi9eA"></a> ## comm 比较文件内容 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs bash">1. 比较文件内容<br><span class="hljs-built_in">comm</span> a.txt b.txt<br>-1 不输出文件1特有的行<br>-2 不输出文件2特有的行<br>-3 不输出两个文件共有的行<br>2.只显示两个文件共有部分<br><span class="hljs-built_in">comm</span> -12 a.txt b.txt<br></code></pre></td></tr></table></figure>
+<a name="EI20q"></a> ## diff 比较文件不同 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs bash">diff a.txt b.txt<br>-c 上下文模式，显示全部内文，并标出不同之处<br>-u 统一模式，以合并的方式来显示文件内容的不同<br></code></pre></td></tr></table></figure>
+<a name="peBXG"></a> ## df 查看磁盘占用情况 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs bash"><span class="hljs-built_in">df</span>是disk free的缩写<br><span class="hljs-built_in">df</span> [选项] 文件（磁盘）<br>1.显示磁盘使用情况<br><span class="hljs-built_in">df</span><br>2. 以inode模式显示<br><span class="hljs-built_in">df</span> -i<br>3.列出文件系统的类型<br><span class="hljs-built_in">df</span> -T<br></code></pre></td></tr></table></figure>
+<a name="uoXcJ"></a> ## du 查看文件和目录的占用情况 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs bash">-a 显示目录中所有文件的大小<br>-h 以K,M,G为单位，提高信息可读性<br>-c 显示综合<br><span class="hljs-built_in">du</span> -h a.txt 文件a.txt的占用<br><span class="hljs-built_in">du</span> -ch a.txt b.txt 两个文件的占用及其总和<br></code></pre></td></tr></table></figure></li>
+</ul>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/linux/" class="category-chain-item">linux</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/linux/" class="print-no-link">#linux</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>Linux 基础指令</div>
+      <div>https://luoxpan.github.io/2023/03/25/Linux/Linux 基础指令/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Luoxpan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2023年3月25日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2023/03/25/Cpp%E5%9B%B0%E6%83%91/CPP%E5%9B%B0%E6%83%91%E7%B3%BB%E5%88%971-%E5%AD%98%E5%82%A8%E6%8C%81%E7%BB%AD%E6%80%A7%E3%80%81%E4%BD%9C%E7%94%A8%E5%9F%9F%E3%80%81%E9%93%BE%E6%8E%A5%E6%80%A7/" title="CPP困惑系列1-存储持续性、作用域、链接性">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">CPP困惑系列1-存储持续性、作用域、链接性</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
