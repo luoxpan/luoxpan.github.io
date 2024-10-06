@@ -19,15 +19,15 @@
   <meta name="author" content="Luoxpan">
   <meta name="keywords" content="">
   
-    <meta name="description" content="CPP 100问 问题来源: B站up主:计算机视觉与OpenCV https:&#x2F;&#x2F;b23.tv&#x2F;fPgu9kg 答案:GPT4+自己整理总结 1.include 双引号与尖括号的区别  双引号优先在当前目录查找 尖括号直接从预设的系统目录中搜索,主要用于包含标准库文件  2.常量指针和指针常量的区别  常量指针const int *p:指向常量的指针,表示不可用p更改所">
+    <meta name="description" content="CPP 100问 问题来源: B站up主:计算机视觉与OpenCV https:&#x2F;&#x2F;b23.tv&#x2F;fPgu9kg 答案:自己整理总结 1.include 双引号与尖括号的区别  双引号优先在当前目录查找 尖括号直接从预设的系统目录中搜索,主要用于包含标准库文件  2.常量指针和指针常量的区别  常量指针const int *p:指向常量的指针,表示不可用p更改所指向的内存">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CPP 面试100问">
 <meta property="og:url" content="https://luoxpan.github.io/2023/04/06/CPP%E9%9D%A2%E8%AF%95100%E9%97%AE/index.html">
 <meta property="og:site_name" content="Luopan">
-<meta property="og:description" content="CPP 100问 问题来源: B站up主:计算机视觉与OpenCV https:&#x2F;&#x2F;b23.tv&#x2F;fPgu9kg 答案:GPT4+自己整理总结 1.include 双引号与尖括号的区别  双引号优先在当前目录查找 尖括号直接从预设的系统目录中搜索,主要用于包含标准库文件  2.常量指针和指针常量的区别  常量指针const int *p:指向常量的指针,表示不可用p更改所">
+<meta property="og:description" content="CPP 100问 问题来源: B站up主:计算机视觉与OpenCV https:&#x2F;&#x2F;b23.tv&#x2F;fPgu9kg 答案:自己整理总结 1.include 双引号与尖括号的区别  双引号优先在当前目录查找 尖括号直接从预设的系统目录中搜索,主要用于包含标准库文件  2.常量指针和指针常量的区别  常量指针const int *p:指向常量的指针,表示不可用p更改所指向的内存">
 <meta property="og:locale" content="zh_CN">
 <meta property="article:published_time" content="2023-04-06T08:09:28.000Z">
-<meta property="article:modified_time" content="2024-03-25T13:35:12.000Z">
+<meta property="article:modified_time" content="2024-10-06T08:12:17.624Z">
 <meta property="article:author" content="Luoxpan">
 <meta property="article:tag" content="CPP">
 <meta name="twitter:card" content="summary_large_image">
@@ -283,7 +283,7 @@
                 <span id="more"></span>
 <h1 id="cpp-100问">CPP 100问</h1>
 <p>问题来源: B站up主:计算机视觉与OpenCV https://b23.tv/fPgu9kg</p>
-<p>答案:GPT4+自己整理总结</p>
+<p>答案:自己整理总结</p>
 <h3 id="include-双引号与尖括号的区别">1.include
 双引号与尖括号的区别</h3>
 <ul>
@@ -313,26 +313,28 @@
 <h3
 id="智能指针的使用有哪些需要注意的点">4.智能指针的使用有哪些需要注意的点</h3>
 <ol type="1">
-<li>避免<code>shared_ptr</code>的循环引用.使用<code>weak_ptr</code>
-打破循环引用.</li>
-<li>注意线程安全:<code>shared_ptr</code>不是线程安全的,如果在一个线程中复制<code>shared_ptr</code>,在另一个线程中删除,可能会导致问题</li>
+<li><p>避免<code>shared_ptr</code>的循环引用.使用<code>weak_ptr</code>
+打破循环引用.</p></li>
+<li><p>注意线程安全:<code>shared_ptr</code>不是线程安全的,如果在一个线程中复制<code>shared_ptr</code>,在另一个线程中删除,可能会导致问题</p></li>
 </ol>
 <h4 id="unique_ptr">unique_ptr</h4>
 <p><code>unique_ptr</code> 是一个独享所有权的智能指针,它禁止了拷贝操作.
-使用场景: 1.
-资源独占:确保一段内存或资源在同一时间只能被一个引用或指针持有时,使用<code>unique_ptr</code>
-2.
-函数返回动态内存:如果函数需要返回一个动态分配的对象,使用<code>unique_ptr</code>
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function">std::unique_ptr&lt;MyClass&gt; <span class="hljs-title">create</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> std::<span class="hljs-built_in">make_unique</span>&lt;MyClass&gt;();<br>&#125; <span class="hljs-comment">// 这样返回的对象不需要手动释放</span><br></code></pre></td></tr></table></figure> 3.
-类的pImpl惯用法:如果想要使用pImpl技术隐藏类的实现细节,<code>unique_ptr</code>是一个很好的选择
-<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">MyClass</span>();<br>    ~<span class="hljs-built_in">MyClass</span>();<br><br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">Impl</span>; <span class="hljs-comment">// 前向声明</span><br>    std::unique_ptr&lt;Impl&gt; pImpl; <span class="hljs-comment">// 使用unique_ptr保存Impl对象的指针，避免头文件中引入Impl的定义</span><br>&#125;;<br></code></pre></td></tr></table></figure></p>
+使用场景:</p>
+<ol type="1">
+<li><p>资源独占:确保一段内存或资源在同一时间只能被一个引用或指针持有时,使用<code>unique_ptr</code></p></li>
+<li><p>函数返回动态内存:如果函数需要返回一个动态分配的对象,使用<code>unique_ptr</code>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-function">std::unique_ptr&lt;MyClass&gt; <span class="hljs-title">create</span><span class="hljs-params">()</span></span><br><span class="hljs-function"></span>&#123;<br>    <span class="hljs-keyword">return</span> std::<span class="hljs-built_in">make_unique</span>&lt;MyClass&gt;();<br>&#125; <span class="hljs-comment">// 这样返回的对象不需要手动释放</span><br></code></pre></td></tr></table></figure></p></li>
+<li><p>类的pImpl惯用法:如果想要使用pImpl技术隐藏类的实现细节,<code>unique_ptr</code>是一个很好的选择
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">MyClass</span><br>&#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">MyClass</span>();<br>    ~<span class="hljs-built_in">MyClass</span>();<br><br><span class="hljs-keyword">private</span>:<br>    <span class="hljs-keyword">class</span> <span class="hljs-title class_">Impl</span>; <span class="hljs-comment">// 前向声明</span><br>    std::unique_ptr&lt;Impl&gt; pImpl; <span class="hljs-comment">// 使用unique_ptr保存Impl对象的指针，避免头文件中引入Impl的定义</span><br>&#125;;<br></code></pre></td></tr></table></figure></p></li>
+</ol>
 <h4 id="shared_ptr">shared_ptr</h4>
 <p><code>shared_ptr</code>
 是一个共享所有权的指针指针,可以有多个shared_ptr指向同一块内存，内部通过引用计数来管理内存的释放。当最后一个指向内存的shared_ptr被销毁时，内存将自动被释放。shared_ptr适合在需要共享所有权的场景中使用</p>
 <p><code>shared_ptr</code>的使用场景 1.
-共享所有权:多个指针对同一个对象进行管理,可以选择<code>shared_ptr</code>,比如,一个程序的不同部分,有多个函数或对象需要共享对同一个动态分配对象的访问.
-2.
-关联容器与智能指针:如果你想在关联容器(例如<code>std::map</code>)中存储指向动态分配对象的指针，同时又希望这些对象在不再需要时能被自动删除，你应该考虑使用<code>shared_ptr</code>。</p>
+共享所有权:多个指针对同一个对象进行管理,可以选择<code>shared_ptr</code>,比如,一个程序的不同部分,有多个函数或对象需要共享对同一个动态分配对象的访问.</p>
+<ol start="2" type="1">
+<li>关联容器与智能指针:如果你想在关联容器(例如<code>std::map</code>)中存储指向动态分配对象的指针，同时又希望这些对象在不再需要时能被自动删除，你应该考虑使用<code>shared_ptr</code>。</li>
+</ol>
 <h4 id="weak_ptr">weak_ptr</h4>
 <p><code>weak_ptr</code>用来解决<code>shared_ptr</code>可能造成的循环引用问题.
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">makeFriend</span><span class="hljs-params">(std::shared_ptr&lt;Person&gt; newFriend)</span> </span>&#123; <br>        friends.<span class="hljs-built_in">push_back</span>(newFriend); <br>        newFriend-&gt;<span class="hljs-built_in">beFriendedBy</span>(std::<span class="hljs-built_in">weak_ptr</span>&lt;Person&gt;(<span class="hljs-built_in">shared_from_this</span>())); <br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">beFriendedBy</span><span class="hljs-params">(std::weak_ptr&lt;Person&gt; somePerson)</span> </span>&#123; weakFriends.<span class="hljs-built_in">push_back</span>(somePerson); &#125;<br><br><span class="hljs-keyword">private</span>:<br>    std::vector&lt;std::__weak_ptr&lt;Person&gt;&gt; weakFriends; <br>    std::vector&lt;std::shared_ptr&lt;Person&gt;&gt; friends;<br>&#125;;<br></code></pre></td></tr></table></figure>
@@ -340,28 +342,36 @@ id="智能指针的使用有哪些需要注意的点">4.智能指针的使用有
 beFriendedBy函数，Person被其他人添加为朋友，记录为weak_ptr类型。这就打破了可能存在的循环参照，避免了内存泄露。</p>
 <p>很多时候,循环引用难以发现,最好的办法是使用更好的类设计以避免<code>weak_ptr</code>的使用.例如,上面的
 Person 类的可读性简直是灾难的.</p>
-<p>更好的类设计是把"朋友关系"单独作为一个类. <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Friendship</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">Friendship</span>(std::shared_ptr&lt;Person&gt; p1, std::shared_ptr&lt;Person&gt; p2) <br>        : <span class="hljs-built_in">person1</span>(p1), <span class="hljs-built_in">person2</span>(p2) &#123;&#125;<br>    <br><span class="hljs-keyword">private</span>:<br>    std::shared_ptr&lt;Person&gt; person1;<br>    std::shared_ptr&lt;Person&gt; person2;<br>&#125;;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">makeFriend</span><span class="hljs-params">(std::shared_ptr&lt;Person&gt; newFriend)</span> </span>&#123; <br>        friendships.<span class="hljs-built_in">push_back</span>(std::<span class="hljs-built_in">make_shared</span>&lt;Friendship&gt;(<span class="hljs-built_in">shared_from_this</span>(), newFriend)); <br>    &#125;<br><br><span class="hljs-keyword">private</span>:<br>    std::vector&lt;std::shared_ptr&lt;Friendship&gt;&gt; friendships;<br>&#125;;<br></code></pre></td></tr></table></figure> ###
-5.内存泄漏是什么,有哪几种,如何解决? 1.
-内存泄漏是指程序中动态分配的堆内存,由于某些原因未释放,导致系统可用内存持续下降,从而影响系统性能甚至导致程序崩溃的事件.
-2. 内存泄漏的类型 1. 无用对象:忘记回收不在使用的内存 2.
-重复分配:在释放前,同一块内存被分配多次 3. 避免或解决内存泄漏的方法 1.
-正确使用智能指针代替<code>new/delete</code>模式.如果一定要用<code>new/delete</code>请注意<code>new[]</code>应与<code>delete []</code>配对.
-2.
-注意异常安全.如果一个函数在分配内存后抛出一个异常,则必须在适当的地方释放内存
-3.
-内存池(对象池).在有大量小而短暂存在的对象的场合,使用对象池可以避免频繁申请和释放内存,同时也能降低内存泄漏的可能性.
-4. 使用内存检测工具如<code>valgrind</code> 等帮助开发者定位内存泄漏.</p>
+<p>更好的类设计是把"朋友关系"单独作为一个类. <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs C++"><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span>;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Friendship</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-built_in">Friendship</span>(std::shared_ptr&lt;Person&gt; p1, std::shared_ptr&lt;Person&gt; p2) <br>        : <span class="hljs-built_in">person1</span>(p1), <span class="hljs-built_in">person2</span>(p2) &#123;&#125;<br>    <br><span class="hljs-keyword">private</span>:<br>    std::shared_ptr&lt;Person&gt; person1;<br>    std::shared_ptr&lt;Person&gt; person2;<br>&#125;;<br><br><span class="hljs-keyword">class</span> <span class="hljs-title class_">Person</span> &#123;<br><span class="hljs-keyword">public</span>:<br>    <span class="hljs-function"><span class="hljs-type">void</span> <span class="hljs-title">makeFriend</span><span class="hljs-params">(std::shared_ptr&lt;Person&gt; newFriend)</span> </span>&#123; <br>        friendships.<span class="hljs-built_in">push_back</span>(std::<span class="hljs-built_in">make_shared</span>&lt;Friendship&gt;(<span class="hljs-built_in">shared_from_this</span>(), newFriend)); <br>    &#125;<br><br><span class="hljs-keyword">private</span>:<br>    std::vector&lt;std::shared_ptr&lt;Friendship&gt;&gt; friendships;<br>&#125;;<br></code></pre></td></tr></table></figure></p>
+<h3
+id="内存泄漏是什么有哪几种如何解决">5.内存泄漏是什么,有哪几种,如何解决?</h3>
+<ol type="1">
+<li><p>内存泄漏是指程序中动态分配的堆内存,由于某些原因未释放,导致系统可用内存持续下降,从而影响系统性能甚至导致程序崩溃的事件.</p></li>
+<li><p>内存泄漏的类型</p>
+<ol type="1">
+<li>无用对象:忘记回收不在使用的内存</li>
+<li>重复分配:在释放前,同一块内存被分配多次</li>
+</ol></li>
+<li><p>避免或解决内存泄漏的方法</p>
+<ol type="1">
+<li>正确使用智能指针代替<code>new/delete</code>模式.如果一定要用<code>new/delete</code>请注意<code>new[]</code>应与<code>delete []</code>配对.</li>
+<li>注意异常安全.如果一个函数在分配内存后抛出一个异常,则必须在适当的地方释放内存</li>
+<li>内存池(对象池).在有大量小而短暂存在的对象的场合,使用对象池可以避免频繁申请和释放内存,同时也能降低内存泄漏的可能性.</li>
+<li>使用内存检测工具如<code>valgrind</code>
+等帮助开发者定位内存泄漏.</li>
+</ol></li>
+</ol>
 <h3 id="newdelete-与-mallocfree-的区别">6.new/delete 与 malloc/free
 的区别</h3>
 <ol type="1">
-<li>new/delete
-为C++标准库提供的关键字,由<memory>头文件提供.malloc/free为C语言库函数.</li>
-<li>malloc/free只负责内存的分配和释放,不会调用构造函数和析构函数.new/delete则可以</li>
-<li>new
-支持根据类型分配内存,编译器可以根据类型计算所需的内存大小,而malloc则需要手动计算并指定所需的内存大小</li>
-<li>new如果无法分配内存,会抛出异常,而malloc则只会返回NULL</li>
-<li>new
-直接返回所需类型的指针,不需要类型转换.而malloc返回的是<code>void*</code>类型,需要进行类型转换.</li>
+<li><p>new/delete
+为C++标准库提供的关键字,由<memory>头文件提供.malloc/free为C语言库函数.</p></li>
+<li><p>malloc/free只负责内存的分配和释放,不会调用构造函数和析构函数.new/delete则可以</p></li>
+<li><p>new
+支持根据类型分配内存,编译器可以根据类型计算所需的内存大小,而malloc则需要手动计算并指定所需的内存大小</p></li>
+<li><p>new如果无法分配内存,会抛出异常,而malloc则只会返回NULL</p></li>
+<li><p>new
+直接返回所需类型的指针,不需要类型转换.而malloc返回的是<code>void*</code>类型,需要进行类型转换.</p></li>
 </ol>
 <h3 id="什么是运行时多态">7. 什么是运行时多态？</h3>
 <p>多态是面向对象编程中的一种特性，它允许我们使用一个接口来实现不同的功能。</p>
@@ -387,19 +397,18 @@ class="math inline">\(O(\log N)\)</span></p>
 是一个特殊的隐含指针，他被每个非静态成员函数隐含的拥有。当一个成员函数被调用时，系统自动将用于调用成员函数的对象的地址赋给<code>this</code>指针。
 所以，<code>this</code>指针指向调用该成员函数的那个对象。</p>
 <p>注意： 1.
-<code>this</code>指针只是编译器的概念，在运行时并没有一个具体的地址能够代表<code>this</code>指针，并没有在物理内存中具体的存储位置
-2.
-静态成员函数不包含<code>this</code>指针，因为静态成员函数属于类本身，而不属于类的对象，它并不访问任何类的非静态成员和非静态方法。
-3.
-不能用<code>this</code>指针调用静态成员变量，在成员函数（不管静态还是非静态）中使用静态成员变量直接用类名来访问<code>Example::static_var</code>。当然也可以用对象访问静态成员变量，但用类名访问可读性更好。
-4.
-总而言之<code>this</code>指针用于在非静态成员函数中，用来访问非静态变量。</p>
+<code>this</code>指针只是编译器的概念，在运行时并没有一个具体的地址能够代表<code>this</code>指针，并没有在物理内存中具体的存储位置</p>
+<ol start="2" type="1">
+<li><p>静态成员函数不包含<code>this</code>指针，因为静态成员函数属于类本身，而不属于类的对象，它并不访问任何类的非静态成员和非静态方法。</p></li>
+<li><p>不能用<code>this</code>指针调用静态成员变量，在成员函数（不管静态还是非静态）中使用静态成员变量直接用类名来访问<code>Example::static_var</code>。当然也可以用对象访问静态成员变量，但用类名访问可读性更好。</p></li>
+<li><p>总而言之<code>this</code>指针用于在非静态成员函数中，用来访问非静态变量。</p></li>
+</ol>
 <h3 id="堆和栈的区别">10. 堆和栈的区别</h3>
 <ol type="1">
-<li>堆和栈在操作系统中表示两种内存分配方式</li>
-<li>栈是自动分配和释放内存的，由系统自动管理。堆的内存在需要主动申请和释放。</li>
-<li>栈主要用于存储局部变量和函数调用的流程。堆的内存则更加自由，可以在运行时动态分配内存</li>
-<li>栈是先进后出的数据结构，访问效率非常高，而堆则需要一定的开销来维护内存和寻找空闲内存块，访问效率相对较低。</li>
+<li><p>堆和栈在操作系统中表示两种内存分配方式</p></li>
+<li><p>栈是自动分配和释放内存的，由系统自动管理。堆的内存在需要主动申请和释放。</p></li>
+<li><p>栈主要用于存储局部变量和函数调用的流程。堆的内存则更加自由，可以在运行时动态分配内存</p></li>
+<li><p>栈是先进后出的数据结构，访问效率非常高，而堆则需要一定的开销来维护内存和寻找空闲内存块，访问效率相对较低。</p></li>
 </ol>
 <h3 id="mallocsbrkmmap">11. malloc(),sbrk(),mmap()</h3>
 <p>sbrk():一个系统调用，用来改变数据段的大小，通常用于实现动态内存分配函数如malloc()。当malloc()无法在空闲链表中找到足够大小的内存块时，它就调用<code>sbrk()</code>来获取更多的内存。</p>
@@ -407,12 +416,12 @@ class="math inline">\(O(\log N)\)</span></p>
 <p>malloc():一个标准C库函数。C库会维护一个空闲链表，调用malloc()可以从空闲链表中找出合适的内存并将其起始地址返回。</p>
 <p>除了malloc(),还有calloc(),realloc(),free()等标准C库函数会访问和维护空闲链表。</p>
 <h3 id="深拷贝和浅拷贝">12. 深拷贝和浅拷贝</h3>
-<p>深拷贝和浅拷贝的概念主要发生在对象发生复制行为时。 1.
-浅拷贝是指在复制对象时，只会直接复制其成员变量本身，如果该成员是一个指针或引用，则会导致两个对象的指针或引用实际上指向了同一个地址，而没有把该地址处的值复制到新的内存给副本对象。
-2.
-深拷贝则是复制对象本身，而且也会复制指针指向的地址数据。使副本对象与原对象的内存空间独立，两者状态不会受对方影响。
-3.
-当成员变量包含指针或引用或其他类对象时，最好自己实现拷贝构造函数和赋值操作符重载。</p>
+<p>深拷贝和浅拷贝的概念主要发生在对象发生复制行为时。</p>
+<ol type="1">
+<li><p>浅拷贝是指在复制对象时，只会直接复制其成员变量本身，如果该成员是一个指针或引用，则会导致两个对象的指针或引用实际上指向了同一个地址，而没有把该地址处的值复制到新的内存给副本对象。</p></li>
+<li><p>深拷贝则是复制对象本身，而且也会复制指针指向的地址数据。使副本对象与原对象的内存空间独立，两者状态不会受对方影响。</p></li>
+<li><p>当成员变量包含指针或引用或其他类对象时，最好自己实现拷贝构造函数和赋值操作符重载。</p></li>
+</ol>
 
                 
               </div>
