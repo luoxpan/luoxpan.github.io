@@ -1,0 +1,804 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/fluid.png">
+  <link rel="icon" href="/img/fluid.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Luoxpan">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="吴恩达的深度学习课程，该课程偏理论，和李沐的《动手深度学习》配合绝佳 1. logistic 回归 logistic 回归：做二元分类的算法。 线性拟合 \(\hat{y}&#x3D;\omega^T x+b\)，\(\hat{y}\)表示分为1类的概率，但概率应该是0-1之间的数，所以引入sigmoid函数。 \(\sigma(z)&#x3D;\frac{1}{1+e^{-x}}\) 令\(\hat">
+<meta property="og:type" content="article">
+<meta property="og:title" content="吴恩达深度学习">
+<meta property="og:url" content="https://luoxpan.github.io/2024/10/26/deeplearning/%E5%90%B4%E6%81%A9%E8%BE%BE_%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/index.html">
+<meta property="og:site_name" content="Luopan">
+<meta property="og:description" content="吴恩达的深度学习课程，该课程偏理论，和李沐的《动手深度学习》配合绝佳 1. logistic 回归 logistic 回归：做二元分类的算法。 线性拟合 \(\hat{y}&#x3D;\omega^T x+b\)，\(\hat{y}\)表示分为1类的概率，但概率应该是0-1之间的数，所以引入sigmoid函数。 \(\sigma(z)&#x3D;\frac{1}{1+e^{-x}}\) 令\(\hat">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-10-26T08:09:28.000Z">
+<meta property="article:modified_time" content="2024-10-27T12:35:57.068Z">
+<meta property="article:author" content="Luoxpan">
+<meta property="article:tag" content="深度学习">
+<meta name="twitter:card" content="summary_large_image">
+  
+  
+  
+  <title>吴恩达深度学习 - Luopan</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/leetcode/iconfont.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"luoxpan.github.io","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":null,"app_key":null,"server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+
+  
+<meta name="generator" content="Hexo 5.4.2"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Fluid</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>首页</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>归档</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>分类</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>标签</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>关于</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="吴恩达深度学习"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2024-10-26 16:09" pubdate>
+          2024年10月26日 下午
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          1.4k 字
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          12 分钟
+        
+      </span>
+    
+
+    
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">吴恩达深度学习</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <span id="more"></span>
+<p>吴恩达的深度学习课程，该课程偏理论，和李沐的《动手深度学习》配合绝佳</p>
+<h2 id="logistic-回归">1. logistic 回归</h2>
+<p>logistic 回归：做二元分类的算法。</p>
+<p>线性拟合 <span class="math inline">\(\hat{y}=\omega^T
+x+b\)</span>，<span
+class="math inline">\(\hat{y}\)</span>表示分为1类的概率，但概率应该是0-1之间的数，所以引入sigmoid函数。</p>
+<p><span class="math inline">\(\sigma(z)=\frac{1}{1+e^{-x}}\)</span></p>
+<p>令<span class="math inline">\(\hat{y}=\sigma(\omega^T
+x+b)\)</span>，则其取值在<span
+class="math inline">\(0-1\)</span>之间。</p>
+<p>如何评价训练的好坏？</p>
+<p>损失函数：<span
+class="math inline">\(l(\hat{y},y)=\frac{1}{2}(\hat{y}-y)^2\)</span></p>
+<p>如何降低损失？</p>
+<p>让<span class="math inline">\(\omega\)</span>和<span
+class="math inline">\(b\)</span>沿着梯度的反方向变化，即<span
+class="math inline">\(\omega\leftarrow\omega-\eta\nabla\omega\)</span>，<span
+class="math inline">\(\eta\)</span>是学习率。</p>
+<p>如何计算梯度？</p>
+<p>计算图（也称保留运算图）。通过正向计算和反向传播计算梯度。</p>
+<h2 id="神经网络概览">2. 神经网络概览</h2>
+<h3 id="激活函数">激活函数</h3>
+<p>激活函数的选择经验：</p>
+<ol type="1">
+<li><p>如果最后的输出层需要输出概率，则在该层选择<code>sigmoid</code>函数。</p></li>
+<li><p>其他层默认使用<code>ReLU</code>函数。只是实践经验得出的，使用<code>ReLU</code>函数的训练速度比使用<code>tanh</code>函数和<code>sigmoid</code>函数快得多。</p></li>
+<li><p>如果一定要在非输出概率层使用<code>sigmoid</code>函数，还不如使用<code>tanh</code>函数，因为<code>sigmoid</code>可能导致梯度消失。</p></li>
+</ol>
+<p>为什么需要使用非线性激活函数？</p>
+<p>如果不使用非线性激活函数，则每层神经网络的输出都只是一个输入的线性相关变量，无论神经网络有多少层，都只能表示线性关系，无法表示复杂的非线性关系。</p>
+<h3 id="权重初始化">权重初始化</h3>
+<ol type="1">
+<li><p>不能全部初始化为0，这会导致隐藏层计算相同的函数。</p></li>
+<li><p>权重初始化的值不能太大，否则可能导致激活函数饱和，减缓学习速度。原因：考虑<span
+class="math inline">\(\sigma(z)=\frac{1}{1+e^{-z}}\)</span>，当<span
+class="math inline">\(z\)</span>很大时，<span
+class="math inline">\(\sigma(z)\)</span>接近1，<span
+class="math inline">\(\sigma
+&#39;(z)\)</span>接近0，导致梯度很小，学习速度很慢。</p></li>
+<li><p>当前主流的初始化方法是<code>Xavier</code>初始化,<code>Xavier</code>初始化的权重初始化值是均值为0，方差为<span
+class="math inline">\(\frac{2}{n_{in}+n_{out}}\)</span>的随机数，其中<span
+class="math inline">\(n_{in}\)</span>是输入的维度，<span
+class="math inline">\(n_{out}\)</span>是输出的维度。</p></li>
+</ol>
+<h3 id="偏差和方差">偏差和方差</h3>
+<p>偏差(Bias):指的是模型预测的准确性。高偏差意味着模型太简单，在训练集和数据集上的表现不佳</p>
+<p>方差(Variance):指的是模型对训练数据的敏感程度（稳定性）。高方差意味着模型过于复杂，在训练集上表现很好，但在数据集上表现不佳</p>
+<p>过拟合：高方差，低偏差</p>
+<p>欠拟合：高偏差，低方差</p>
+<table>
+<thead>
+<tr>
+<th>Train set error</th>
+<th>Dev set error</th>
+<th>结论</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1%</td>
+<td>11%</td>
+<td>过拟合</td>
+</tr>
+<tr>
+<td>15%</td>
+<td>16%</td>
+<td>欠拟合</td>
+</tr>
+</tbody>
+</table>
+<p>策略选择：</p>
+<p>一般而言，需要先保证训练集上的误差足够低，再考虑在数据集上的表现。
+即先实现低偏差，当偏差降到可接收时，考虑降低方差。</p>
+<ol type="1">
+<li>高偏差：更大的网络结构，更多训练时间</li>
+<li>高方差：更多数据，L2正则化，dropout，早停</li>
+</ol>
+<h3 id="正则化">正则化</h3>
+<p>正则化：一种非常实用的减少方差的方法。在机器学习初期，偏差和方差的权衡很受关注，
+但在深度学习和大数据时代，通过适当的正则化后，更大的网络和更多的数据往往能带来偏差和方差的同时降低。</p>
+<p>吴恩达：正则化也会出现偏差和方差权衡问题，偏差可能略有提高，但如果网络足够大，增幅通常不会太高。</p>
+<h4 id="l2正则化">L2正则化：</h4>
+<p>L2正则化前： <span class="math display">\[
+J(w,b)=\frac{1}{m} \sum_{i=1}^{m} L(\hat{y}^{(i)}, y^{(i)})\\
+w_i=w_i-\eta\frac{\partial J(w,b)}{\partial w_i}
+\]</span> L2正则化后： <span class="math display">\[
+J(w,b)=\frac{1}{m} \sum_{i=1}^{m} L(\hat{y}^{(i)},
+y^{(i)})+\frac{\lambda}{2m}||w||^2\\
+w_i=w_i-\eta\frac{\partial J(w,b)}{\partial
+w_i}-\eta\frac{\lambda}{m}w_i
+\]</span> L2正则化使得<span
+class="math inline">\(w_i\)</span>的值沿着梯度下降时，额外被惩罚了，使得<span
+class="math inline">\(w_i\)</span>的值变小，从而降低了模型的复杂度，减少了过拟合的风险。</p>
+<p>为什么L2正则化可以减少过拟合？</p>
+<p>考虑一个简单的二维散点拟合，当发生过拟合时，拟合图像可能非常弯曲（向过山车那样）。</p>
+<p>L2正则化通过不让<span
+class="math inline">\(w_i\)</span>的值过大，从而让拟合图像更平滑，其实也就是较小了对噪声的敏感性，从而降低了过拟合的风险。</p>
+<h4 id="dropout">dropout</h4>
+<p>通过丢弃一些节点来降低模型复杂度，从而降低过拟合的风险。</p>
+<p>常见的做法并不是真正的丢弃，而是让一些节点变为0，同时为了让期望不变，需要把保留的值增大。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs python"><span class="hljs-comment"># d3.dype=bool,keep_prob=0.5</span><br>d3=np.random.rand(a3.shape[<span class="hljs-number">0</span>],a3.shape[<span class="hljs-number">1</span>])&lt;keep_prob <br>a3=a3*d3    <span class="hljs-comment"># 50%的节点变为0</span><br>a3=a3/keep_prob <span class="hljs-comment">#保留的节点变为2倍，总期望不变</span><br></code></pre></td></tr></table></figure>
+<p>测试阶段，一般将<code>keep_prob</code>设置为1，即不丢弃任何节点。因为dropout涉及随机，测试阶段不想要随机性。
+当然，也可以在测试阶段使用dropout不为1，但需要多预测几次，取平均值作为最终结果。</p>
+<p>dropout
+在计算机视觉领域广泛使用，在其他领域使用较少。因为计算机视觉数据较少，容易发生过拟合，
+而dropout正是解决该问题的好办法。</p>
+<h4 id="其他正则化">其他正则化：</h4>
+<p>数据增强：翻转、裁剪、缩放等，通过增加数据量来降低过拟合的风险。</p>
+<p>早停：在验证集上的误差不再下降时停止训练。</p>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/deeplearning/" class="category-chain-item">deeplearning</a>
+  
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" class="print-no-link">#深度学习</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>吴恩达深度学习</div>
+      <div>https://luoxpan.github.io/2024/10/26/deeplearning/吴恩达_深度学习/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>作者</div>
+          <div>Luoxpan</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>发布于</div>
+          <div>2024年10月26日</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>许可协议</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - 署名">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2024/10/06/CPP/CPP11/" title="C++11">
+                        <span class="hidden-mobile">C++11</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>目录</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  
+      <script>
+        if (!window.MathJax) {
+          window.MathJax = {
+            tex    : {
+              inlineMath: { '[+]': [['$', '$']] }
+            },
+            loader : {
+              load: ['ui/lazy']
+            },
+            options: {
+              renderActions: {
+                insertedScript: [200, () => {
+                  document.querySelectorAll('mjx-container').forEach(node => {
+                    let target = node.parentNode;
+                    if (target.nodeName.toLowerCase() === 'li') {
+                      target.parentNode.classList.add('has-jax');
+                    }
+                  });
+                }, '', false]
+              }
+            }
+          };
+        } else {
+          MathJax.startup.document.state(0);
+          MathJax.texReset();
+          MathJax.typeset();
+          MathJax.typesetPromise();
+        }
+
+        Fluid.events.registerRefreshCallback(function() {
+          if ('MathJax' in window && MathJax.startup.document && typeof MathJax.startup.document.state === 'function') {
+            MathJax.startup.document.state(0);
+            MathJax.texReset();
+            MathJax.typeset();
+            MathJax.typesetPromise();
+          }
+        });
+      </script>
+    
+
+  <script  src="https://lib.baomitu.com/mathjax/3.2.2/es5/tex-mml-chtml.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">博客在允许 JavaScript 运行的环境下浏览效果更佳</div>
+  </noscript>
+</body>
+</html>
