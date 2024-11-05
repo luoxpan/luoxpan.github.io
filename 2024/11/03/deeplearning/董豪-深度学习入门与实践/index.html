@@ -36,8 +36,16 @@
 <meta property="og:image" content="https://s2.loli.net/2024/11/04/yYxaMUmKQJjiszT.png">
 <meta property="og:image" content="https://s2.loli.net/2024/11/04/Atw6KIevoBuW249.png">
 <meta property="og:image" content="https://s2.loli.net/2024/11/04/tlJhvO8TrMdeakP.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/kH7InuhetyKVzD6.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/JzCZQSranVtfRsL.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/oXlZCcJ4i3AzK1m.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/ON6F8g5h7kQJBxf.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/Xf4OUbiK3R2AQdY.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/J8caHvPnAz25gt1.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/ILZj9Ps27p5MHn1.png">
+<meta property="og:image" content="https://s2.loli.net/2024/11/05/lqnfcXbeDuIFh36.png">
 <meta property="article:published_time" content="2024-11-03T06:09:28.000Z">
-<meta property="article:modified_time" content="2024-11-04T11:29:33.230Z">
+<meta property="article:modified_time" content="2024-11-05T09:49:34.377Z">
 <meta property="article:author" content="Luoxpan">
 <meta property="article:tag" content="深度学习">
 <meta name="twitter:card" content="summary_large_image">
@@ -238,7 +246,7 @@
       <span class="post-meta mr-2">
         <i class="iconfont icon-chart"></i>
         
-          3.4k 字
+          5k 字
         
       </span>
     
@@ -249,7 +257,7 @@
         
         
         
-          29 分钟
+          42 分钟
         
       </span>
     
@@ -575,6 +583,140 @@ alt="tlJhvO8TrMdeakP.png" />
 <figcaption aria-hidden="true">tlJhvO8TrMdeakP.png</figcaption>
 </figure>
 <p>后续的很多研究都通过加入跳跃连接来提升细节处的分割效果。</p>
+<h1 id="生成对抗网络gan">生成对抗网络(GAN)</h1>
+<h2 id="gan">GAN</h2>
+<p>GAN
+网络分为生成器和判别器两部分，生成器负责生成图像，判别器负责判断图像是否真实。</p>
+<p>判别器：真图判为1，假图判为0</p>
+<p>生成器：生成尽可能真实的假图</p>
+<p>GAN 的训练过程：</p>
+<ol type="1">
+<li>判别器先训练，生成器固定</li>
+<li>判别器训练后，生成器更新，生成器固定</li>
+<li>重复1、2步骤</li>
+</ol>
+<h2 id="dcgan">DCGAN</h2>
+<p>DCGAN（Deep Convolutional Generative Adversarial
+Networks）是一种基于卷积神经网络的生成对抗网络。它使用卷积层和反卷积层来生成和判别图像。</p>
+<h2 id="acgan">ACGAN</h2>
+<p>ACGAN（Auxiliary Classifier
+GAN）是一种改进的生成对抗网络，它引入了一个辅助分类器来帮助生成器生成更高质量的图像。辅助分类器在生成器生成图像后，对图像进行分类，从而指导生成器生成更符合分类器要求的图像。</p>
+<h2 id="vae">VAE</h2>
+<p>GAN 根据一个特征向量生成图像，但有时我们希望知道图像的特征向量。</p>
+<p>VAE（Variational
+Autoencoder）是一种生成模型，它可以将输入数据编码为特征向量，然后将特征向量解码为输出数据。VAE
+的主要思想是通过编码器将输入数据映射到潜在空间，然后通过解码器将潜在空间中的特征向量映射回输出数据。通过最小化输入图像和输出图像的差距，并限制潜在空间中的特征向量满足某些约束条件，从而找到特征向量。</p>
+<figure>
+<img src="https://s2.loli.net/2024/11/05/kH7InuhetyKVzD6.png" srcset="/img/loading.gif" lazyload
+alt="kH7InuhetyKVzD6.png" />
+<figcaption aria-hidden="true">kH7InuhetyKVzD6.png</figcaption>
+</figure>
+<p>GAN
+包含一个生成器和一个判别器，而VAE只包含一个编码器和一个解码器。</p>
+<p>所以新的想法产生，即给GAN加上编码器(Encoder)，这样就可以给GAN网络输入一张图片了。</p>
+<h1 id="循环神经网络rnn">循环神经网络(RNN)</h1>
+<h2 id="动机-1">动机</h2>
+<p>序列数据：文本、时间序列、语音、视频等</p>
+<h2 id="词汇表征">词汇表征</h2>
+<p>One-hot编码：将每个单词表示为一个向量，向量中只有一个元素为1，其余元素为0。</p>
+<p>词汇表很大，One-hot编码会非常稀疏。</p>
+<p>词袋模型(bag of
+words)：将每个单词表示为一个向量，向量中每个元素表示该单词在文本中出现的次数。同样存在向量爆炸问题，且该表征方法忽略了单词的顺序。</p>
+<h3 id="词嵌入word-embedding">词嵌入(Word Embedding)</h3>
+<p>使用一个浮点数向量表征一个单词，相似的单词在向量空间中距离较近。</p>
+<p>构建词嵌入矩阵，矩阵的每一行对应一个单词，每一列对应一个特征。例如一个5x3的词嵌入矩阵可以表征5个单词，每个单词用一个3维向量表示。</p>
+<p>如何找到一个好的词嵌入矩阵呢？</p>
+<p>理想的词嵌入矩阵：</p>
+<ul>
+<li>低维度。使用尽量少的浮点数来表征一个单词。</li>
+<li>能够表达词汇的语义信息。例如，相似的单词在向量空间中距离较近。</li>
+</ul>
+<p>学习词嵌入矩阵的方法： 1. 无标签，使用大量文本数据进行自监督学习</p>
+<p>Word2Vec：=Skip-gram/CBOW + Negative
+Sampling，前者通过上下文学习特征，后者加速训练。</p>
+<p>CBOW：最大化上下文中间单词出现的概率。</p>
+<p>如图所示，将bird的上下文<code>a,blue,on,the</code>作为输入，所有的输入都经过同一个词嵌入矩阵获得对应的词向量，然后求平均，最后通过一个softmax层输出中间单词的概率。这样，为了能正确预测中间的单词，词嵌入矩阵得到了训练。</p>
+<figure>
+<img src="https://s2.loli.net/2024/11/05/JzCZQSranVtfRsL.png" srcset="/img/loading.gif" lazyload
+alt="JzCZQSranVtfRsL.png" />
+<figcaption aria-hidden="true">JzCZQSranVtfRsL.png</figcaption>
+</figure>
+<p>Skip-pram:与CBOW相反，通过中间单词预测上下文。</p>
+<figure>
+<img src="https://s2.loli.net/2024/11/05/oXlZCcJ4i3AzK1m.png" srcset="/img/loading.gif" lazyload
+alt="oXlZCcJ4i3AzK1m.png" />
+<figcaption aria-hidden="true">oXlZCcJ4i3AzK1m.png</figcaption>
+</figure>
+<p>由于词汇很多，训练很慢。使用Negative Sampling加速训练。</p>
+<p>Negative
+Sampling：在训练过程中，只更新一小部分词向量，而不是更新所有的词向量。</p>
+<p>计算损失时，正样本数量少，负样本数量多，比如总共一万个单词，只有4个正样本（假设上下文只有四个），其余都是负样本。对于负样本其实我们不是很关心，所以只需要随机取N个负样本进行计算即可。</p>
+<figure>
+<img src="https://s2.loli.net/2024/11/05/ON6F8g5h7kQJBxf.png" srcset="/img/loading.gif" lazyload
+alt="ON6F8g5h7kQJBxf.png" />
+<figcaption aria-hidden="true">ON6F8g5h7kQJBxf.png</figcaption>
+</figure>
+<h2 id="循环神经网络rnn-1">循环神经网络(RNN)</h2>
+<h3 id="动机-2">动机</h3>
+<p>RNN：处理序列数据，如文本、时间序列、语音、视频等。</p>
+<p>RNN的输入是序列数据，输出也是序列数据。</p>
+<p>RNN的隐藏层包含一个循环神经网络单元，该单元可以处理序列中的每个元素，并生成一个输出。</p>
+<p>RNN当前层的输入为当前输入和上一层的输出。</p>
+<figure>
+<img src="https://s2.loli.net/2024/11/05/Xf4OUbiK3R2AQdY.png" srcset="/img/loading.gif" lazyload
+alt="Xf4OUbiK3R2AQdY.png" />
+<figcaption aria-hidden="true">Xf4OUbiK3R2AQdY.png</figcaption>
+</figure>
+<h3 id="rnn缺陷">RNN缺陷</h3>
+<p>当序列长度较长时，RNN的隐藏层单元只能记住序列中的部分信息，导致RNN难以处理长序列数据。</p>
+<h2 id="长短期记忆网络lstm">长短期记忆网络(LSTM)</h2>
+<p>LSTM：解决RNN的缺陷，可以处理长序列数据。</p>
+<p>LSTM的隐藏层单元包含一个记忆单元和一个遗忘门，可以记住序列中的信息，并控制信息的遗忘程度。</p>
+<p>LSTM的输出由当前输入、记忆单元和遗忘门共同决定。</p>
+<h3 id="门函数gate-function">门函数(Gate Function)</h3>
+<p>将Input Vector和Gate
+Vector点对点相乘，得到一个权重向量，该权重向量可以控制Input
+Vector的输出程度。</p>
+<h3 id="遗忘门forget-gate">遗忘门(Forget Gate)</h3>
+<p>遗忘门的门向量由当前输入和上一层的输出共同决定。</p>
+<p>遗忘门的输出是一个0到1之间的实数，表示记忆单元中信息的遗忘程度。</p>
+<p><span class="math inline">\(f_t=\sigma(W_f \cdot x_t + U_f \cdot
+h_{t-1} + b_f)\)</span></p>
+<figure>
+<img src="https://s2.loli.net/2024/11/05/J8caHvPnAz25gt1.png" srcset="/img/loading.gif" lazyload
+alt="J8caHvPnAz25gt1.png" />
+<figcaption aria-hidden="true">J8caHvPnAz25gt1.png</figcaption>
+</figure>
+<h3 id="输入门input-gate">输入门(Input Gate)</h3>
+<p>同样，输入门也需要一个门向量，由当前输入和上一层的输出共同决定。</p>
+<p>还要计算当前当前输入的信息，当前输入信息经过输入门之后与之前被遗忘门处理过的记忆单元相加，得到新的记忆单元。</p>
+<p>输入门向量：</p>
+<p><span class="math inline">\(i_t=\sigma(W_i \cdot x_t + U_i \cdot
+h_{t-1} + b_i)\)</span></p>
+<p>信息向量：</p>
+<p><span class="math inline">\(\tilde{c}_t=\tanh(W_c \cdot x_t + U_c
+\cdot h_{t-1} + b_c)\)</span></p>
+<p>新的记忆单元：</p>
+<p><span class="math inline">\(c_t = f_t \cdot c_{t-1} + i_t \cdot
+\tilde{c}_t\)</span></p>
+<figure>
+<img src="https://s2.loli.net/2024/11/05/ILZj9Ps27p5MHn1.png" srcset="/img/loading.gif" lazyload
+alt="ILZj9Ps27p5MHn1.png" />
+<figcaption aria-hidden="true">ILZj9Ps27p5MHn1.png</figcaption>
+</figure>
+<h3 id="输出门output-gate">输出门(Output Gate)</h3>
+<p>还需要计算新的输出。</p>
+<p>输出门由当前输入和上一层的输出以及记忆单元决定。</p>
+<p>输出门向量：</p>
+<p><span class="math inline">\(o_t=\sigma(W_o \cdot x_t + U_o \cdot
+h_{t-1} + b_o)\)</span></p>
+<p>新的输出：</p>
+<p><span class="math inline">\(h_t = o_t \cdot \tanh(c_t)\)</span></p>
+<figure>
+<img src="https://s2.loli.net/2024/11/05/lqnfcXbeDuIFh36.png" srcset="/img/loading.gif" lazyload
+alt="lqnfcXbeDuIFh36.png" />
+<figcaption aria-hidden="true">lqnfcXbeDuIFh36.png</figcaption>
+</figure>
 
                 
               </div>
